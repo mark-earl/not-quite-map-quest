@@ -9,11 +9,15 @@
 unsigned int Digraph::noVertices()
 {
     // @TODO
+
+    return -1;
 }
 
 unsigned int Digraph::noEdges()
 {
     // @TODO
+
+    return -1;
 }
 
 void Digraph::resetEdges()
@@ -34,9 +38,13 @@ void Digraph::delEdge(int source, int dest)
 int Digraph::isEdge(int source, int dest)
 {
     // @TODO
+
+    return -1;
 }
 
 int Digraph::dijkstra(int source, int dest)
 {
     // @TODO
+
+    return -1;
 }
