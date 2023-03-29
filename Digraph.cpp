@@ -6,9 +6,10 @@
 
 #include "Digraph.hpp"
 
-void Digraph::addVertex(string s)
+// @param id [in] The name of the city
+void Digraph::addVertex(string id)
 {
-    Node* n = new Node(s);
+    Node* n = new Node(id);
     vertex.push_back(n);
     numberOfVertices++;
     distMatrix.resize(numberOfVertices);
@@ -37,24 +38,24 @@ void Digraph::resetEdges()
     // @TODO
 }
 
-void Digraph::addEdge(int source, int dest, int wt)
+void Digraph::addEdge(int source, int destination, int weight)
 {
     // @TODO
 }
 
-void Digraph::delEdge(int source, int dest)
+void Digraph::delEdge(int source, int destination)
 {
     // @TODO
 }
 
-int Digraph::isEdge(int source, int dest)
+int Digraph::isEdge(int source, int destination)
 {
     // @TODO
 
     return -1;
 }
 
-int Digraph::dijkstra(int source, int dest)
+int Digraph::dijkstra(int source, int destination)
 {
     // @TODO
 

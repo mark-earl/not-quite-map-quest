@@ -66,10 +66,10 @@ public:
     unsigned int noVertices();
     unsigned int noEdges();
     void resetEdges();
-    void addEdge(int source, int dest, int wt);
-    void delEdge(int source, int dest);
-    int isEdge(int source, int dest);
-    int dijkstra(int source, int dest);
+    void addEdge(int source, int destination, int weight);
+    void delEdge(int source, int destination);
+    int isEdge(int source, int destination);
+    int dijkstra(int source, int destination);
 };
 
 #endif // DIGRAPH_HPP
