@@ -15,13 +15,16 @@ int main()
 {
     Digraph directedGraph;
     ifstream dataFile;
-    int numPoints, p, q, r;
+
+    // the number of cities in the graph, each city is a node
+    int numberOfNodes;
+    int p, q, r;
     string city;
 
     dataFile.open("nqmq.dat");
-    dataFile >> numPoints;
+    dataFile >> numberOfNodes;
 
-    for (int i = 0; i < numPoints; i++) {
+    for (int i = 0; i < numberOfNodes; i++) {
         dataFile >> city;
         directedGraph.addVertex(city);
     }

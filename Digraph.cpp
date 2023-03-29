@@ -6,6 +6,18 @@
 
 #include "Digraph.hpp"
 
+void Digraph::addVertex(string s)
+{
+    Node* n = new Node(s);
+    vertex.push_back(n);
+    numberOfVertices++;
+    distMatrix.resize(numberOfVertices);
+
+    for (int i = 0; i < numberOfVertices; i++) {
+        distMatrix[i].resize(numberOfVertices);
+    }
+}
+
 unsigned int Digraph::noVertices()
 {
     // @TODO
