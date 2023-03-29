@@ -4,6 +4,8 @@
 # 	-This is an "in source" build
 #	-The clean target is a part of the `make` command
 #	 and will remove any generated object files.
+#	-You can also run the executable directly from the command
+#	 line by running `./digraph.out` after building the executable.
 #
 # Terminal Commands
 # 	-To build executable: 	`make`
