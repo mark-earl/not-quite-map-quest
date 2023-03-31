@@ -97,8 +97,7 @@ int Digraph::getEdgeWeight(int source, int destination) const {
         return -1;
     }
 
-    // @TODO calculate edge weight
-    return 123456789;
+    return distMatrix[source][destination];
 }
 
 int Digraph::dijkstra(int source, int destination) const
