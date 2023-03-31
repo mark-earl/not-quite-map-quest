@@ -9,11 +9,10 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
 
-using std::string;
-using std::cout;
-using std::endl;
+// -----------------------------------DELETE EVENTUALLY
+#include <iostream>
+// -----------------------------------DELETE EVENTUALLY
 
 enum Status { NOT_VISITED, VISITED };
 
@@ -22,7 +21,7 @@ class Node {
 private:
 
     // name of the city
-    string name;
+    std::string name;
 
     // whether the city has been visited or not
     enum Status status;
@@ -30,7 +29,7 @@ private:
 public:
 
     // constructor
-    Node(string id) {
+    Node(std::string id) {
         name = id;
         status = NOT_VISITED;
     }
@@ -46,7 +45,7 @@ public:
     }
 
     // @stereotype get
-    string getName() const {
+    std::string getName() const {
         return name;
     }
 };
@@ -62,15 +61,16 @@ protected:
 
 public:
 
-    void addVertex(string s);
+    void addVertex(std::string s);
     unsigned int noVertices();
     unsigned int noEdges();
     void resetEdges();
     void addEdge(int source, int destination, int weight);
-    void delEdge(int source, int destination);
+    void deleteEdge(int source, int destination);
     int isEdge(int source, int destination);
-    int dijkstra(int source, int destination);
+    int dijkstra(int source, int destination) const;
 
+    // -----------------------------------DELETE EVENTUALLY
     // for debugging
     void display() {
         for (auto edge:distMatrix) {
@@ -94,6 +94,7 @@ public:
             {0, 1, 2, 3, 4, 5, 6, 7}
         };
     }
+    // -----------------------------------DELETE EVENTUALLY
 };
 
 #endif // DIGRAPH_HPP
