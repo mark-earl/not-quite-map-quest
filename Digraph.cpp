@@ -38,7 +38,7 @@ void Digraph::resetEdges()
 {
     // clear every edge (empty vectors)
     for(auto& edge:distMatrix)
-        edge.clear();
+        edge.assign(numberOfVertices, 0);
 
     // set number of edges to 0
     numberOfEdges = 0;
@@ -56,7 +56,8 @@ void Digraph::addEdge(int source, int destination, int weight)
     if (isEdge(source, destination))
         return;
 
-    // add the edge @TODO
+    // add the edge to the graph
+    distMatrix[source][destination] = weight;
     ++numberOfEdges;
 }
 
@@ -70,7 +71,8 @@ void Digraph::deleteEdge(int source, int destination)
     if (!isEdge(source, destination))
         return;
 
-    // delete the edge @TODO
+    // delete the edge, 0 represents the absence of an edge
+    distMatrix[source][destination] = 0;
     --numberOfEdges;
 }
 
@@ -81,10 +83,9 @@ void Digraph::deleteEdge(int source, int destination)
 // @retval false An edge DOES NOT exist that directly connects `source` to `destination`
 bool Digraph::isEdge (int source, int destination) const
 {
-    // @TODO checks if the specified edge exists
+    if (distMatrix[source][destination] == 0)
+        return false;
     return true;
-    // @TODO other wise, return false
-    return false;
 }
 
 // If an edge exists that directly connects `source` to `destination`, return its weight

@@ -33,15 +33,6 @@ int main()
         directedGraph.addVertex(city);
     }
 
-    // -----------------------------------DELETE EVENTUALLY
-    std::cout << "Before call to set garbage:\n"; directedGraph.display();
-    directedGraph.setGarbage();
-    std::cout << "Before call to reset edges:\n"; directedGraph.display();
-    directedGraph.resetEdges();
-    std::cout << "After call to reset edges:\n"; directedGraph.display();
-    // -----------------------------------DELETE EVENTUALLY
-
-
     // read in the first route
 
     // read in the source
