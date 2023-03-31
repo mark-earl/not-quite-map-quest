@@ -10,14 +10,13 @@
 #include <exception>
 #include "Digraph.hpp"
 
-using std::ifstream;
-
+// test suite
 void test1(const Digraph& directedGraph);
 void test2(const Digraph& directedGraph);
 
 int main()
 {
-    ifstream dataFile;
+    std::ifstream dataFile;
 
     dataFile.open("nqmq.dat");
 
@@ -26,8 +25,9 @@ int main()
     dataFile >> numberOfNodes;
 
     // the name of each city
-    Digraph directedGraph;
     std::string city;
+    // directed graph to store the cities in
+    Digraph directedGraph;
     for (int i = 0; i < numberOfNodes; i++) {
         dataFile >> city;
         directedGraph.addVertex(city);
@@ -41,13 +41,21 @@ int main()
     std::cout << "After call to reset edges:\n"; directedGraph.display();
     // -----------------------------------DELETE EVENTUALLY
 
-    int sourceIndex;
-    int destinationIndex;
-    int distance;
 
+    // read in the first route
+
+    // read in the source
+    int sourceIndex;
     dataFile >> sourceIndex;
+
+    // read in the destination
+    int destinationIndex;
     dataFile >> destinationIndex;
+
+    // read in the distance between the source and the destination
+    int distance;
     dataFile >> distance;
+
 
     // -1 delimits the list
     while (sourceIndex > -1) {
@@ -56,11 +64,14 @@ int main()
         directedGraph.addEdge(sourceIndex, destinationIndex, distance);
         // from destination back to source
         directedGraph.addEdge(destinationIndex, sourceIndex, distance);
+
+        // read in the next route
         dataFile >> sourceIndex;
         dataFile >> destinationIndex;
         dataFile >> distance;
     }
 
+    // close the input file once done reading
     dataFile.close();
 
     // test suite
