@@ -14,8 +14,12 @@
 #include <iostream>
 // -----------------------------------DELETE EVENTUALLY
 
+// Enumerated type to help keep track of wether a city has
+// been visited or not
 enum Status { NOT_VISITED, VISITED };
 
+// Helper class, represents nodes on a directional graph.
+// In our case, each node is a city
 class Node {
 
 private:
@@ -24,14 +28,15 @@ private:
     std::string name;
 
     // whether the city has been visited or not
+    // NOT_VISITED or VISITED
     enum Status status;
 
 public:
 
     // constructor
-    Node(std::string id) {
-        name = id;
-        status = NOT_VISITED;
+    Node(std::string cityName) {
+        name = cityName;
+        status = Status::NOT_VISITED;
     }
 
     // @stereotype get
@@ -52,11 +57,37 @@ public:
 
 class Digraph {
 
-protected:
+private:
+
+    // number of vertices (cities) in the graph (map)
     unsigned int numberOfVertices = 0;
+
+    // number of edges (routes) in the graph (map)
     unsigned int numberOfEdges = 0;
+
+    // vector of pointers to nodes (cities)
     std::vector<Node*> vertices;
-    // 2D vector
+
+    /*
+        adjacency matrix for storing the directed graph
+
+        something like this:
+
+           0  1  2  3 . . .
+        0  0  1  0  0 . . .
+        1  1  0  0  1 . . .
+        2  0  0  0  0 . . .
+        3  0  1  0  0 . . .
+        .  .  .  .  .
+        .  .  .  .  .
+        .  .  .  .  .
+
+        the top row of indices is the first dimension
+        the left colum of indices is the second dimension
+
+        note that for each route, there is a path to and from
+        the source and destination
+    */
     std::vector<std::vector<int>> distMatrix;
 
 public:
