@@ -70,6 +70,30 @@ public:
     void delEdge(int source, int destination);
     int isEdge(int source, int destination);
     int dijkstra(int source, int destination);
+
+    // for debugging
+    void display() {
+        for (auto edge:distMatrix) {
+            for(auto city:edge) {
+                std::cout << city << ", ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    void setGarbage() {
+        distMatrix =
+        {
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7}
+        };
+    }
 };
 
 #endif // DIGRAPH_HPP

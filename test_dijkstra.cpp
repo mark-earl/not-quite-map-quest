@@ -29,7 +29,11 @@ int main()
         directedGraph.addVertex(city);
     }
 
+    directedGraph.setGarbage();
+    std::cout << "Before call to reset edges:\n"; directedGraph.display();
     directedGraph.resetEdges();
+    std::cout << "After call to reset edges:\n"; directedGraph.display();
+
     dataFile >> p;
     dataFile >> q;
     dataFile >> r;

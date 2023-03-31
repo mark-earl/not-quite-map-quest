@@ -35,8 +35,8 @@ unsigned int Digraph::noEdges()
 
 void Digraph::resetEdges()
 {
-    // clear every edge
-    for(auto edge:distMatrix)
+    // clear every edge (empty vectors)
+    for(auto& edge:distMatrix)
         edge.clear();
 
     // set number of edges to 0
