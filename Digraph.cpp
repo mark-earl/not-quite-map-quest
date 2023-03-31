@@ -25,22 +25,15 @@ void Digraph::addVertex(std::string id)
     }
 }
 
-unsigned int Digraph::noVertices()
-{
-    // @TODO
-    // not sure what this function does, not used in main()
+// Returns the number of vertices
+// @stereotype get
+unsigned int Digraph::getNumberOfVertices() const { return numberOfVertices; }
 
-    return -1;
-}
+// Returns the number of edges
+// @stereotype get
+unsigned int Digraph::getNumberOfEdges() const { return numberOfEdges; }
 
-unsigned int Digraph::noEdges()
-{
-    // @TODO
-    // not sure what this function does, not used in main()
-
-    return -1;
-}
-
+// Clears all of the edge vectors by setting them as empty
 void Digraph::resetEdges()
 {
     // clear every edge (empty vectors)
@@ -53,9 +46,9 @@ void Digraph::resetEdges()
 
 
 // If there is not already an edge that directly connects
-// `source` to `destination`, it is added.
-// @param source The index of the source city.
-// @param destination The index of the destination city.
+// `source` to `destination`, it is added
+// @param source The index of the source city
+// @param destination The index of the destination city
 // @param weight The distance between `source` and `destination`
 void Digraph::addEdge(int source, int destination, int weight)
 {
@@ -68,9 +61,9 @@ void Digraph::addEdge(int source, int destination, int weight)
 }
 
 // If there is an edge that directly connects `source` to
-// `destination`, it is deleted.
-// @param source The index of the source city.
-// @param destination The index of the destination city.
+// `destination`, it is deleted
+// @param source The index of the source city
+// @param destination The index of the destination city
 void Digraph::deleteEdge(int source, int destination)
 {
     // check if the edge exists
@@ -81,17 +74,35 @@ void Digraph::deleteEdge(int source, int destination)
     --numberOfEdges;
 }
 
-int Digraph::isEdge(int source, int destination)
+// Checks to see if an edge exists that directly connects `source` to `destination`
+// @param source The index of the source city
+// @param destination The index of the destination city
+// @retval true An edge exists that directly connects `source` to `destination`
+// @retval false An edge DOES NOT exist that directly connects `source` to `destination`
+bool Digraph::isEdge (int source, int destination) const
 {
-    // @TODO
-    // checks if the specified edge exists (need to verify that is the intended functionality)
-    return -1;
+    // @TODO checks if the specified edge exists
+    return true;
+    // @TODO other wise, return false
+    return false;
+}
+
+// If an edge exists that directly connects `source` to `destination`, return its weight
+// @return The distance (weight) between `source` and `distance`
+// @retval -1 The specified edge from `source` to `destination` DOES NOT exist.
+int Digraph::getEdgeWeight(int source, int destination) const {
+
+    if (!isEdge(source, destination)) {
+        return -1;
+    }
+
+    // @TODO calculate edge weight
+    return 123456789;
 }
 
 int Digraph::dijkstra(int source, int destination) const
 {
-    // @TODO
-    // finds shortest path from the source to the destination
+    // @TODO find shortest path from the source index to the destination index
 
     return -1;
 }

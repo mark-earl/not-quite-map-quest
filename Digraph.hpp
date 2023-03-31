@@ -93,12 +93,13 @@ private:
 public:
 
     void addVertex(std::string s);
-    unsigned int noVertices();
-    unsigned int noEdges();
+    unsigned int getNumberOfVertices() const;
+    unsigned int getNumberOfEdges() const;
     void resetEdges();
     void addEdge(int source, int destination, int weight);
     void deleteEdge(int source, int destination);
-    int isEdge(int source, int destination);
+    bool isEdge(int source, int destination) const;
+    int getEdgeWeight(int source, int destination) const;
     int dijkstra(int source, int destination) const;
 
     // -----------------------------------DELETE EVENTUALLY
