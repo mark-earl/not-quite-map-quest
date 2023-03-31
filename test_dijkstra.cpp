@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <exception>
 #include "Digraph.hpp"
 
 using std::ifstream;
@@ -63,8 +64,14 @@ int main()
     dataFile.close();
 
     // test suite
-    test1(directedGraph); // Los Angeles to Boston
-    test2(directedGraph); // San Francisco to Miami
+    try {
+        test1(directedGraph); // Los Angeles to Boston
+        test2(directedGraph); // San Francisco to Miami
+    }
+
+    catch (std::logic_error& e) {
+        std::cerr << e.what();
+    }
 
     return 0;
 }
@@ -77,8 +84,7 @@ void test1(const Digraph& directedGraph) {
 
     // check dijkstra algorithm
     if (shortestDistance != 2602) {
-        std::cout << "TEST FAILED\n\n";
-        return;
+        throw std::logic_error("TEST FAILED\n\n");
     }
 
     std::cout << "Test passed\n\n";
@@ -91,8 +97,7 @@ void test2(const Digraph& directedGraph) {
 
     // check dijkstra algorithm
     if (shortestDistance != 3056) {
-        std::cout << "TEST FAILED\n\n";
-        return;
+        throw std::logic_error("TEST FAILED\n\n");
     }
 
     std::cout << "Test passed\n\n";
