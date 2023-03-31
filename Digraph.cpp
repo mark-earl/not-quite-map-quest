@@ -10,7 +10,7 @@
 void Digraph::addVertex(string id)
 {
     Node* n = new Node(id);
-    vertex.push_back(n);
+    vertices.push_back(n);
     numberOfVertices++;
     distMatrix.resize(numberOfVertices);
 
@@ -35,7 +35,12 @@ unsigned int Digraph::noEdges()
 
 void Digraph::resetEdges()
 {
-    // @TODO
+    // clear every edge
+    for(auto edge:distMatrix)
+        edge.clear();
+
+    // set number of edges to 0
+    numberOfEdges = 0;
 }
 
 void Digraph::addEdge(int source, int destination, int weight)

@@ -56,7 +56,7 @@ class Digraph {
 protected:
     unsigned int numberOfVertices = 0;
     unsigned int numberOfEdges = 0;
-    std::vector<Node*> vertex;
+    std::vector<Node*> vertices;
     // 2D vector
     std::vector<std::vector<int>> distMatrix;
 
