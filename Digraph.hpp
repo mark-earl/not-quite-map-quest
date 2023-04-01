@@ -68,26 +68,8 @@ private:
     // vector of pointers to nodes (cities)
     std::vector<Node*> vertices;
 
-    /*
-        adjacency matrix for storing the directed graph
-
-        something like this:
-
-           0  1  2  3 . . .
-        0  0  1  0  0 . . .
-        1  1  0  0  1 . . .
-        2  0  0  0  0 . . .
-        3  0  1  0  0 . . .
-        .  .  .  .  .
-        .  .  .  .  .
-        .  .  .  .  .
-
-        the top row of indices is the first dimension
-        the left colum of indices is the second dimension
-
-        note that for each route, there is a path to and from
-        the source and destination
-    */
+    // adjacency matrix for storing the directed graph
+    // the values are weights(distances)
     std::vector<std::vector<int>> distMatrix;
 
 public:
@@ -98,8 +80,7 @@ public:
     void resetEdges();
     void addEdge(int source, int destination, int weight);
     void deleteEdge(int source, int destination);
-    bool isEdge(int source, int destination) const;
-    int getEdgeWeight(int source, int destination) const;
+    int isEdge(int source, int destination) const;
     int dijkstra(int source, int destination) const;
 
     // -----------------------------------DELETE EVENTUALLY
@@ -127,6 +108,11 @@ public:
         };
     }
     // -----------------------------------DELETE EVENTUALLY
+
+private:
+
+    int minVertexIndex(const std::vector<int>& dist) const;
+
 };
 
 #endif // DIGRAPH_HPP

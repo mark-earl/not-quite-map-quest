@@ -65,6 +65,8 @@ int main()
     // close the input file once done reading
     dataFile.close();
 
+    directedGraph.display();
+
     // test suite
     try {
         test1(directedGraph); // Los Angeles to Boston
