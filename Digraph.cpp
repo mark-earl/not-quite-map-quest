@@ -95,60 +95,68 @@ int Digraph::isEdge (int source, int destination) const
 // Compute shortest path distances from `source` to `destination`
 int Digraph::dijkstra(int source, int destination) const
 {
-    // // holds min distance to each vertex from source
-    // // initially, all distances are INFINITY
-    // std::vector<int> distances(numberOfVertices, INFINITY);
+    // vector to store the minimum distance from the source vertex to each vertex
+    std::vector<int> dist(numberOfVertices, INFINITY);
 
-    // // we know that the distance from the source, to the source, is 0
-    // distances[source] = 0;
+    // set the distance from the source vertex to itself to 0
+    dist[source] = 0;
 
-    // // iterate over all the vertices
-    // for (auto vertex:vertices) {
+    // vector to store whether each vertex has been visited or not
+    std::vector<bool> visited(numberOfVertices, false);
 
-    //     // Find the closest vertex that has not been visited
-    //     int u = minVertex(distances);
-    //     vertices[u]->setStatus(Status::VISITED);
+    // loop through all vertices
+    for (unsigned int i = 0; i < numberOfVertices; ++i) {
 
-    //     // Update the distances of all reachable neighbors of u
-    //     for (int v = 0; v < numberOfVertices; ++v) {
+        // get the index of the vertex with the minimum distance from the source
+        int minVertexIndex = minVertex(dist, visited);
 
-    //         // If u and v are adjacent and v has not been visited
-    //         if (isEdge(u, v) != -1 && vertices[v]->getStatus() == Status::NOT_VISITED) {
-    //             // Calculate the new distance from source to v through u
-    //             int alt = distances[u] + distMatrix[u][v];
-    //             // If the new distance is shorter than the current distance
-    //             if (alt < distances[v]) {
-    //                 // Update the distance to v
-    //                 distances[v] = alt;
-    //             }
-    //         }
-    //     }
-    // }
+        // mark the vertex as visited
+        visited[minVertexIndex] = true;
 
-    // // Return the distance to the destination vertex if it exists, otherwise return -1
-    // return distances[destination] != INFINITY ? distances[destination] : -1;
-    return 1;
-}
+        // loop through all neighbors of the current vertex
+        for (unsigned int j = 0; j < numberOfVertices; ++j) {
 
-int Digraph::minVertex(const std::vector<int>& distances) const {
-    // Initialize minimum values
-    int minDistance = INFINITY;
-    int minVertexIndex = -1;
+            // if there is an edge between the current vertex and its neighbor
+            if (isEdge(minVertexIndex, j) != -1) {
 
-    // Iterate over all vertices
-    for (int u = 0; u < numberOfVertices; ++u) {
+                // calculate the distance to the neighbor through the current vertex
+                int alt = dist[minVertexIndex] + isEdge(minVertexIndex, j);
 
-        // If u has not been visited and its distance is less than the minimum distance seen so far
-        if ( (vertices[u]->getStatus() == Status::NOT_VISITED) && (distances[u] < minDistance) ) {
+                // if the new distance is shorter than the current distance
+                if (alt < dist[j]) {
 
-            // Update the minimum distance
-            minDistance = distances[u];
-
-            // Update the index of the vertex with the minimum distance
-            minVertexIndex = u;
+                    // update the distance to the neighbor
+                    dist[j] = alt;
+                }
+            }
         }
     }
 
-    // Return the index of the vertex with the minimum distance
-    return minVertexIndex;
+    // return the minimum distance to the destination vertex
+    return dist[destination];
+}
+
+int Digraph::minVertex(const std::vector<int>& dist, const std::vector<bool>& visited) const {
+    // initialize the minimum distance to infinity
+    int minDist = INFINITY;
+
+    // initialize the index of the minimum vertex to -1
+    int minIndex = -1;
+
+    // loop through all vertices
+    for (unsigned int i = 0; i < numberOfVertices; ++i) {
+
+        // if the vertex has not been visited and its distance from the source is less than the current minimum distance
+        if (!visited[i] && dist[i] <= minDist) {
+
+            // set the minimum distance to the distance of the current vertex from the source
+            minDist = dist[i];
+
+            // set the index of the minimum vertex to the current vertex
+            minIndex = i;
+        }
+    }
+
+    // return the index of the vertex with the minimum distance from the source
+    return minIndex;
 }

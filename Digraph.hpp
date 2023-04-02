@@ -119,7 +119,7 @@ public:
 
 private:
 
-    int minVertex(const std::vector<int>& dist) const;
+    int minVertex(const std::vector<int>& dist, const std::vector<bool>& visited) const;
 
 };
 
