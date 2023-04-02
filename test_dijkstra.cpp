@@ -9,10 +9,7 @@
 #include <string>
 #include <exception>
 #include "Digraph.hpp"
-
-// test suite
-void test1(const Digraph& directedGraph);
-void test2(const Digraph& directedGraph);
+#include "TestSuite.hpp"
 
 int main()
 {
@@ -65,44 +62,18 @@ int main()
     // close the input file once done reading
     dataFile.close();
 
-    directedGraph.display();
-
     // test suite
-    try {
-        test1(directedGraph); // Los Angeles to Boston
-        test2(directedGraph); // San Francisco to Miami
-    }
 
-    catch (std::logic_error& e) {
-        std::cerr << e.what();
-    }
+    std::cout << "This test suite verifies the implementation of dijkstra's algorithm.\n";
+    std::cout << "It will compute the shortest path to every city starting, from every city.\n\n";
+    Test test;
+    test.testDijkstraFromAtlanta_GA(directedGraph);
+    test.testDijkstraFromBoston_MA(directedGraph);
+    test.testDijkstraFromChicago_IL(directedGraph);
+    test.testDijkstraFromDenver_CO(directedGraph);
+    test.testDijkstraFromLos_Angeles_CA(directedGraph);
+    test.testDijkstraFromMiami_FL(directedGraph);
+    test.testDijkstraFromNew_York_NY(directedGraph);
 
     return 0;
-}
-
-void test1(const Digraph& directedGraph) {
-
-    std::cout << "TEST 1. Los Angeles to Boston\n";
-    int shortestDistance = directedGraph.dijkstra(4, 1);
-    std::cout << "*** Final distance: " << shortestDistance << " miles.\n";
-
-    // check dijkstra algorithm
-    if (shortestDistance != 2602) {
-        throw std::logic_error("TEST FAILED\n\n");
-    }
-
-    std::cout << "Test passed\n\n";
-}
-void test2(const Digraph& directedGraph) {
-
-    std::cout << "TEST 2. San Francisco to Miami\n";
-    int shortestDistance = directedGraph.dijkstra(7, 5);
-    std::cout << "*** Final distance: " << shortestDistance << " miles.\n";
-
-    // check dijkstra algorithm
-    if (shortestDistance != 3056) {
-        throw std::logic_error("TEST FAILED\n\n");
-    }
-
-    std::cout << "Test passed\n\n";
 }

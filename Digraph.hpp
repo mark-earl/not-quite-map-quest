@@ -85,33 +85,41 @@ public:
 
     // -----------------------------------DELETE EVENTUALLY
     // for debugging
-    void display() {
+    void display() const {
         for (auto edge:distMatrix) {
             for(auto city:edge) {
-                std::cout << city << ", ";
+                std::cout << city << '\t';
             }
-            std::cout << std::endl;
+            std::cout << "\n\n\n";
         }
     }
+    void displayVertices() const {
+        std::cout << "Vertices:\n";
+        for (auto vertex:vertices) {
+            std::cout << vertex->getName() << ", ";
 
-    void setGarbage() {
-        distMatrix =
-        {
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7}
-        };
+            if (vertex->getStatus() == 0)
+                std::cout << "NOT_VISITED";
+            else if (vertex->getStatus() == 1)
+                std::cout << "VISITED";
+
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
+    }
+    void displayDijkstra() const {
+        for (int i = 0; i < 3; ++i) {
+            for(int j = 0; j < 3; ++j) {
+                std::cout << dijkstra(i, j) << ", ";
+            }
+            std::cout << "";
+        }
     }
     // -----------------------------------DELETE EVENTUALLY
 
 private:
 
-    int minVertexIndex(const std::vector<int>& dist) const;
+    int minVertex(const std::vector<int>& dist) const;
 
 };
 

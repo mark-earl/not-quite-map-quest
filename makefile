@@ -21,8 +21,11 @@ Digraph.o: Digraph.cpp
 	@${CC} ${FLAGS} -c Digraph.cpp
 	@echo [33%]\  Successfully created Digraph object file.
 
-digraph.out: Digraph.o test_dijkstra.cpp
-	@echo [66%]\  Building Executable.
+TestSuite.o: TestSuite.cpp
+	@${CC} ${FLAGS} -c TestSuite.cpp
+	@echo [66%]\  Successfully created TestSuite object file.
+
+digraph.out: Digraph.o TestSuite.o test_dijkstra.cpp
 	@${CC} ${FLAGS} test_dijkstra.cpp *.o -o digraph.out
 	@echo [100%] Successfully built digraph.out, type \`make run\` to execute.
 
