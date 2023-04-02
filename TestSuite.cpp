@@ -35,14 +35,14 @@ std::map<int, std::string> CITIES {
 void testTemplate(const Digraph& graph, const enum CITIES source, const int correctValues[]) {
 
     // formatting constants
-    const int cityWidth = 34;
+    const int cityWidth = 36;
     const int valueWidth = 12;
 
     // header
     std::cout << "## TEST " << source + 1 << ". Starting from " << CITIES[source] << "\n";
     // table columns
-    std::cout << "| Route                            |" << std::setw(valueWidth) << " Distance | Passed |\n";
-    std::cout << "|:---------------------------------|" << std::setw(valueWidth) << std::setfill('-') << ":|:";
+    std::cout << "| Route                              |" << std::setw(valueWidth) << " Distance | Passed |\n";
+    std::cout << "|:-----------------------------------|" << std::setw(valueWidth) << std::setfill('-') << ":|:";
     std::cout << std::setw(valueWidth-3) << std::setfill('-') << ":|\n" << std::setfill(' ');
 
     // flag for entire test

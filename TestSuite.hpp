@@ -3,7 +3,20 @@
 
 #include "Digraph.hpp"
 class Test {
+
     public:
+        void testSuite(const Digraph& graph){
+            testDijkstraFromAtlanta_GA(graph);
+            testDijkstraFromBoston_MA(graph);
+            testDijkstraFromChicago_IL(graph);
+            testDijkstraFromDenver_CO(graph);
+            testDijkstraFromLos_Angeles_CA(graph);
+            testDijkstraFromMiami_FL(graph);
+            testDijkstraFromNew_York_NY(graph);
+            testDijkstraFromSan_Francisco_CA(graph);
+        }
+
+    private:
         void testDijkstraFromAtlanta_GA(const Digraph& graph);
         void testDijkstraFromBoston_MA(const Digraph& graph);
         void testDijkstraFromChicago_IL(const Digraph& graph);

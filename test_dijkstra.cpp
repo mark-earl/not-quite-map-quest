@@ -67,13 +67,7 @@ int main()
     std::cout << "This test suite verifies the implementation of dijkstra's algorithm.\n";
     std::cout << "It will compute the shortest path to every city starting, from every city.\n\n";
     Test test;
-    test.testDijkstraFromAtlanta_GA(directedGraph);
-    test.testDijkstraFromBoston_MA(directedGraph);
-    test.testDijkstraFromChicago_IL(directedGraph);
-    test.testDijkstraFromDenver_CO(directedGraph);
-    test.testDijkstraFromLos_Angeles_CA(directedGraph);
-    test.testDijkstraFromMiami_FL(directedGraph);
-    test.testDijkstraFromNew_York_NY(directedGraph);
+    test.testSuite(directedGraph);
 
     return 0;
 }
