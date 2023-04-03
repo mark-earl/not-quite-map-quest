@@ -8,14 +8,28 @@
 #include <fstream>
 #include <string>
 #include <exception>
+#include <cstring>
 #include "Digraph.hpp"
 #include "TestSuite.hpp"
 
-int main()
+int main(int argc, char* argv[])
 {
+    bool bigFile = false;
+    bool testSuite = false;
+
+    for (int i = 0; i < argc; ++i) {
+        if (strcmp(argv[i], "big") == 0)
+            bigFile = true;
+        if (strcmp(argv[i], "test") == 0)
+            testSuite = true;
+    }
+
     std::ifstream dataFile;
 
-    dataFile.open("nqmq.dat");
+    if (bigFile)
+        dataFile.open("nqmqBig.dat");
+    else
+        dataFile.open("nqmq.dat");
 
     // the number of cities in the graph, each city is a node
     int numberOfNodes;
@@ -62,12 +76,26 @@ int main()
     // close the input file once done reading
     dataFile.close();
 
-    // test suite
+    // testing
+    if (testSuite) {
 
-    std::cout << "This test suite verifies the implementation of dijkstra's algorithm.\n";
-    std::cout << "It will compute the shortest path to every city starting, from every city.\n\n";
-    Test test;
-    test.testSuite(directedGraph);
+        Test test;
+
+        if(bigFile)
+            std::cout << "Simulation of big file test suite.\n"; // @TODO run menu gui BIG
+        else
+            test.testSuite(directedGraph);
+    }
+
+    // menu gui
+    else {
+
+        if(bigFile)
+            std::cout << "Simulation of big file menu gui.\n"; // @TODO run menu gui BIG
+        else
+            std::cout << "Simulation of menu gui.\n"; // @TODO run menu gui
+
+    }
 
     return 0;
 }

@@ -24,3 +24,9 @@ clean:
 
 run:
 	@./digraph.out
+test:
+	@./digraph.out test
+run_big:
+	@./digraph.out big
+test_big:
+	@./digraph.out big test
