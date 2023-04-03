@@ -1,3 +1,9 @@
+/*
+    @file TestSuite.cpp
+
+    Implementation file for the test suite on dijkstra's algorithm
+*/
+
 #include "TestSuite.hpp"
 
 #include <iostream>
@@ -123,11 +129,16 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
 
 }
 
+// Tests dijkstra's algorithm
+// @param graph [in] The graph represented as an adjacency matrix
+// @param fullReport [in] Determines the output format [Y/N]
+// @param bigData [in] Determines the input for the algorithm (false by default)
 void Test::testSuite(const Digraph& graph, char fullReport, bool bigData) {
 
     // holds the correct values for each test
     std::vector<std::vector<int>> correctDistances;
 
+    // nqmqBig.dat
     if (bigData) correctDistances = {
         { 0, 1328, 335, 546, 194, 114, 184, 981, 195, 452, 405, 437, 304, 284, 270, 277, 620, 901, 428, 1113, 1295, 279, 424, 519, 355, 137, 1332, 38},                     // Akron as the source
         { 1328, 0, 1300, 782, 1134, 1214, 1164, 670, 1342, 1417, 1370, 1402, 1425, 1249, 1369, 1051, 758, 427, 1122, 581, 211, 1426, 1389, 1044, 1320, 1284, 369, 1366},    // Bismarck as the source
@@ -159,6 +170,7 @@ void Test::testSuite(const Digraph& graph, char fullReport, bool bigData) {
         { 38, 1366, 373, 584, 232, 152, 222, 1019, 233, 490, 443, 475, 342, 322, 308, 315, 658, 939, 466, 1151, 1333, 317, 462, 557, 393, 175, 1370, 0}                     // Youngstown as the source
     };
 
+    // nqmq.dat
     else correctDistances = {
     { 0, 951, 606, 1514, 2348, 595, 760, 2461 },    // Atlanta_GA as the source
     { 951, 0, 860, 1768, 2602, 1281, 191, 2715 },   // Boston_MA as the source
@@ -175,6 +187,7 @@ void Test::testSuite(const Digraph& graph, char fullReport, bool bigData) {
     for(int city = 0; city < (bigData ? VERTICES_BIG : VERTICES); ++city)
         testTemplate(graph, city, correctDistances[city], fullReport, bigData, passedAllTests);
 
+    // let client know all tests passed
     if (passedAllTests)
         std::cout << "## All Tests Passed!\n\n";
 

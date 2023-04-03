@@ -15,9 +15,12 @@
 
 int main(int argc, char* argv[])
 {
+    // flag for nqmqBig.dat
     bool bigData = false;
+    // flag for testing
     bool testSuite = false;
 
+    // get command line arguments
     for (int i = 0; i < argc; ++i) {
         if (strcmp(argv[i], "big") == 0)
             bigData = true;
@@ -25,8 +28,8 @@ int main(int argc, char* argv[])
             testSuite = true;
     }
 
+    // open the appropriate input file
     std::ifstream dataFile;
-
     if (bigData)
         dataFile.open("nqmqBig.dat");
     else
@@ -80,25 +83,30 @@ int main(int argc, char* argv[])
     // testing
     if (testSuite) {
 
+        // test object
         Test test;
 
+        // Let the user decide whether they want a full report or not
         char fullReport;
 
         do {
+            // input prompt
             std::cout << "Show full report?[Y/N]\n";
             std::cout << "Full Report: All routes and distances are displayed\n";
             std::cout << "Short Report: Only the test headers are displayed\n";
             std::cout << "Please enter 'Y' or 'N':";
             std::cin >> fullReport;
 
+            // input validation
             if(std::cin.fail()) {
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
                 std::cout<<"Invalid Input\n";
             }
         }
-        while(fullReport != 'N' && fullReport != 'Y');
+        while(fullReport != 'N' && fullReport != 'Y'); // only accept 'Y' or 'N'
 
+        // run the appropriate test suite
         if(bigData)
             test.testSuite(directedGraph, fullReport, bigData);
         else
