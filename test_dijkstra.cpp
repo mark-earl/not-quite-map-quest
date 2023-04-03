@@ -9,6 +9,7 @@
 #include <string>
 #include <exception>
 #include <cstring>
+#include <limits>
 #include "Digraph.hpp"
 #include "TestSuite.hpp"
 
@@ -81,10 +82,27 @@ int main(int argc, char* argv[])
 
         Test test;
 
+        char fullReport;
+
+        do {
+            std::cout << "Show full report?[Y/N]\n";
+            std::cout << "Full Report: All routes and distances are displayed\n";
+            std::cout << "Short Report: Only the test headers are displayed\n";
+            std::cout << "Please enter 'Y' or 'N':";
+            std::cin >> fullReport;
+
+            if(std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                std::cout<<"Invalid Input\n";
+            }
+        }
+        while(fullReport != 'N' && fullReport != 'Y');
+
         if(bigData)
-            test.testSuite(directedGraph, bigData);
+            test.testSuite(directedGraph, fullReport, bigData);
         else
-            test.testSuite(directedGraph);
+            test.testSuite(directedGraph, fullReport);
     }
 
     // menu gui

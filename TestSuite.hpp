@@ -5,7 +5,7 @@
 
 class Test {
     public:
-        void testSuite(const Digraph& graph, bool bigData = false);
+        void testSuite(const Digraph& graph, char fullReport, bool bigData = false);
 };
 
 #endif // TEST_SUITE_HPP

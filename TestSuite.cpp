@@ -58,7 +58,7 @@ std::map<int, std::string> CITIES_MAP {
 // @param source [in] The specified "starting point"
 // @param correctValues [in] An array that holds the correct values for output of dijkstra's algorithm
 // @param bigData [in] Flag indicating whether we are using the big data file or not
-void testTemplate(const Digraph& graph, int source, const std::vector<int>& correctValues, bool bigData) {
+void testTemplate(const Digraph& graph, int source, const std::vector<int>& correctValues, char fullReport, bool bigData, bool& passedAllTests) {
 
     // formatting constants
     const int cityWidth = 36;
@@ -70,11 +70,13 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
 
     // test description
     std::string startingCity = CITIES_MAP[source + indexOffset];
-    std::cout << "## TEST " << source + 1 << ". Starting from " << startingCity  << "\n";
+    std::cout << "## TEST " << source + 1 << ((source + 1 > 9) ? "." : ". ") << " Starting from " << std::setw(20) << std::left << startingCity;
 
     // table columns
-    std::cout << "| Route                              | Distance | Passed |\n";
-    std::cout << "|:-----------------------------------|---------:|:------:|\n";
+    if (fullReport == 'Y') {
+        std::cout << "\n| Route                              | Distance | Passed |\n";
+        std::cout <<   "|:-----------------------------------|---------:|:------:|\n";
+    }
 
     // flag for current test
     bool passed = true;
@@ -87,8 +89,10 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
         int dist = graph.dijkstra(source , CITY);
 
         // output route and distance
-        std::cout << '|' << std::setw(cityWidth) << std::left << route;
-        std::cout << '|' << std::setw(distWidth) << std::right << dist << '|';
+        if (fullReport == 'Y') {
+            std::cout << '|' << std::setw(cityWidth) << std::left << route;
+            std::cout << '|' << std::setw(distWidth) << std::right << dist << '|';
+        }
 
         // get passed condition (OK or FAIL)
         std::string passedMessage = "OK";
@@ -99,7 +103,8 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
         }
 
         // output passed condition
-        std::cout << std::setw(passedWidth) << std::right << passedMessage << "|\n";
+        if (fullReport == 'Y')
+            std::cout << std::setw(passedWidth) << std::right << passedMessage << "|\n";
     }
 
     // get test summary
@@ -107,15 +112,18 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
 
     if (!passed) {
         passedMessage = "FAILED";
-        // @TODO add global fail call
+        passedAllTests = false;
     }
 
     // output test summary
-    std::cout << "\nTEST " << source + 1 << " - " << passedMessage << "\n\n";
+    if (fullReport == 'Y')
+        std::cout << "\nTEST " << source + 1 << " - " << passedMessage << "\n\n";
+    else
+        std::cout << passedMessage << "\n";
 
 }
 
-void Test::testSuite(const Digraph& graph, bool bigData) {
+void Test::testSuite(const Digraph& graph, char fullReport, bool bigData) {
 
     // holds the correct values for each test
     std::vector<std::vector<int>> correctDistances;
@@ -163,7 +171,11 @@ void Test::testSuite(const Digraph& graph, bool bigData) {
     };
 
     // test all cities
+    bool passedAllTests = true;
     for(int city = 0; city < (bigData ? VERTICES_BIG : VERTICES); ++city)
-        testTemplate(graph, city, correctDistances[city], bigData);
+        testTemplate(graph, city, correctDistances[city], fullReport, bigData, passedAllTests);
+
+    if (passedAllTests)
+        std::cout << "## All Tests Passed!\n\n";
 
 }
