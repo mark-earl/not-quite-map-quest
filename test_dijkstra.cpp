@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
         Test test;
 
         if(bigData)
-            test.testSuiteBig(directedGraph);
+            test.testSuite(directedGraph, bigData);
         else
             test.testSuite(directedGraph);
     }

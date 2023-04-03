@@ -4,15 +4,8 @@
 #include "Digraph.hpp"
 
 class Test {
-
     public:
-        void testSuite(const Digraph& graph);
-        void testSuiteBig(const Digraph& graph);
-
-    private:
-        void failed() { allTestsPassed = false; }
-        bool allTestsPassed = true;
-
+        void testSuite(const Digraph& graph, bool bigData = false);
 };
 
 #endif // TEST_SUITE_HPP
