@@ -116,12 +116,72 @@ int main(int argc, char* argv[])
     // menu gui
     else {
 
-        if(bigData)
-            std::cout << "Simulation of big file menu gui.\n"; // @TODO run menu gui BIG
-        else
-            std::cout << "Simulation of menu gui.\n"; // @TODO run menu gui
+        char again = 'Y';
 
+        while (again == 'Y') {
+
+            std::cout << "Select Starting City:\n";
+            for (int i = 0; i < directedGraph.getNumberOfVertices(); ++i)
+                std::cout << i + 1 << ") " << directedGraph.getVertex(i)->getName() << '\n';
+
+            int source = -1;
+
+            do {
+                // input prompt
+                std::cin >> source;
+
+                // input validation
+                if(std::cin.fail()) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                    std::cout << "Invalid Input, enter a number from the table above: ";
+                    source = -1;
+                }
+            }
+            while(source < 0 || source > directedGraph.getNumberOfVertices());
+
+            std::cout << "Select Ending City:\n";
+            for (int i = 0; i < directedGraph.getNumberOfVertices(); ++i)
+                std::cout << i + 1 << ") " << directedGraph.getVertex(i)->getName() << '\n';
+
+            int destination = -1;
+
+            do {
+                // input prompt
+                std::cin >> destination;
+
+                // input validation
+                if(std::cin.fail()) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                    std::cout << "Invalid Input, enter a number from the table above: ";
+                    destination = -1;
+                }
+            }
+            while(destination < 0 || destination > directedGraph.getNumberOfVertices());
+
+            std::cout << "\nThe distance between " << directedGraph.getVertex(source - 1)->getName();
+            std::cout << " and " << directedGraph.getVertex(destination - 1)->getName();
+            std::cout << " is: " << directedGraph.dijkstra(source - 1, destination - 1) << "\n\n";
+
+            do {
+                // input prompt
+                std::cout << "Again?[Y/N]\n";
+                std::cout << "Please enter 'Y' or 'N':";
+                std::cin >> again;
+                std::cout << std::endl;
+
+                // input validation
+                if(std::cin.fail()) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                    std::cout<<"Invalid Input\n";
+                }
+            }
+            while(again != 'N' && again != 'Y'); // only accept 'Y' or 'N'
+        }
     }
+
 
     return 0;
 }

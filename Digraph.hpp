@@ -82,6 +82,7 @@ public:
     void deleteEdge(int source, int destination);
     int isEdge(int source, int destination) const;
     int dijkstra(int source, int destination) const;
+    Node* getVertex(int i) const { return vertices[i]; }
 
     // -----------------------------------DELETE EVENTUALLY
     // for debugging
