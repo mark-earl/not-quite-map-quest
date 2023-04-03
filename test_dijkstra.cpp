@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
         Test test;
 
         if(bigFile)
-            std::cout << "Simulation of big file test suite.\n"; // @TODO run menu gui BIG
+            test.testSuiteBig(directedGraph);
         else
             test.testSuite(directedGraph);
     }
