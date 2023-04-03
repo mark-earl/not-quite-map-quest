@@ -144,7 +144,7 @@ int Digraph::minVertex(const std::vector<int>& dist, const std::vector<bool>& vi
     int minIndex = -1;
 
     // loop through all vertices
-    for (unsigned int i = 0; i < numberOfVertices; ++i) {
+    for (int i = 0; i < numberOfVertices; ++i) {
 
         // if the vertex has not been visited and its distance from the source is less than the current minimum distance
         if (!visited[i] && dist[i] <= minDist) {
