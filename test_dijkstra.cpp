@@ -14,19 +14,19 @@
 
 int main(int argc, char* argv[])
 {
-    bool bigFile = false;
+    bool bigData = false;
     bool testSuite = false;
 
     for (int i = 0; i < argc; ++i) {
         if (strcmp(argv[i], "big") == 0)
-            bigFile = true;
+            bigData = true;
         if (strcmp(argv[i], "test") == 0)
             testSuite = true;
     }
 
     std::ifstream dataFile;
 
-    if (bigFile)
+    if (bigData)
         dataFile.open("nqmqBig.dat");
     else
         dataFile.open("nqmq.dat");
@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
 
         Test test;
 
-        if(bigFile)
+        if(bigData)
             test.testSuiteBig(directedGraph);
         else
             test.testSuite(directedGraph);
@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
     // menu gui
     else {
 
-        if(bigFile)
+        if(bigData)
             std::cout << "Simulation of big file menu gui.\n"; // @TODO run menu gui BIG
         else
             std::cout << "Simulation of menu gui.\n"; // @TODO run menu gui

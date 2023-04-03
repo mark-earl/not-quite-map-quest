@@ -1,14 +1,16 @@
 #include "TestSuite.hpp"
+
 #include <iostream>
 #include <iomanip>
-#include <cassert>
 #include <vector>
 #include <map>
 
 // Flag to indicate big data or not
-#define BIG_DATA 1
+#define BIG_DATA true
 
+// number of vertices in nqmq.dat
 const int vertices = 8;
+// number of vertices in nqmqBig.dat
 const int verticesBig = 28;
 
 // Represents the city indexes as text
@@ -59,44 +61,44 @@ enum CITIES {
 std::map<int, std::string> CITIES_MAP {
 
     // nqmq.dat
-    {Atlanta_GA, "Atlanta_GA"},
-    {Boston_MA, "Boston_MA"},
-    {Chicago_IL, "Chicago_IL"},
-    {Denver_CO, "Denver_CO"},
-    {Los_Angeles_CA, "Los_Angeles_CA"},
-    {Miami_FL, "Miami_FL"},
-    {New_York_NY, "New_York_NY"},
-    {San_Francisco_CA, "San_Francisco_CA"},
+    {Atlanta_GA, "Atlanta_GA"},             // 0
+    {Boston_MA, "Boston_MA"},               // 1
+    {Chicago_IL, "Chicago_IL"},             // 2
+    {Denver_CO, "Denver_CO"},               // 3
+    {Los_Angeles_CA, "Los_Angeles_CA"},     // 4
+    {Miami_FL, "Miami_FL"},                 // 5
+    {New_York_NY, "New_York_NY"},           // 6
+    {San_Francisco_CA, "San_Francisco_CA"}, // 7
 
     // nqmqBig.dat
-    {Akron, "Akron"},
-    {Bismarck, "Bismarck"},
-    {Bloomington, "Bloomington"},
-    {Chicago, "Chicago"},
-    {Cincinnati, "Cincinnati"},
-    {Columbus, "Columbus"},
-    {Dayton, "Dayton"},
-    {DesMoines, "Des Moines"},
-    {Detroit, "Detroit"},
-    {Evansville, "Evansville"},
-    {FortWayne, "Fort Wayne"},
-    {Gary, "Gary"},
-    {GrandRapids, "Grand Rapids"},
-    {Indianapolis, "Indianapolis"},
-    {Kalamazoo, "Kalamazoo"},
-    {Louisville, "Louisville"},
-    {Milwaukee, "Milwaukee"},
-    {Minneapolis, "Minneapolis"},
-    {Nashville, "Nashville"},
-    {Omaha, "Omaha"},
-    {Pierre, "Pierre"},
-    {Saginaw, "Saginaw"},
-    {SouthBend, "South Bend"},
-    {SaintLouis, "Saint Louis"},
-    {TerreHaute, "Terre Haute"},
-    {Toledo, "Toledo"},
-    {Winnepeg, "Winnepeg"},
-    {Youngstown, "Youngstown"}
+    {Akron, "Akron"},                       // 8
+    {Bismarck, "Bismarck"},                 // 9
+    {Bloomington, "Bloomington"},           // 10
+    {Chicago, "Chicago"},                   // 11
+    {Cincinnati, "Cincinnati"},             // 12
+    {Columbus, "Columbus"},                 // 13
+    {Dayton, "Dayton"},                     // 14
+    {DesMoines, "Des Moines"},              // 15
+    {Detroit, "Detroit"},                   // 16
+    {Evansville, "Evansville"},             // 17
+    {FortWayne, "Fort Wayne"},              // 18
+    {Gary, "Gary"},                         // 19
+    {GrandRapids, "Grand Rapids"},          // 20
+    {Indianapolis, "Indianapolis"},         // 21
+    {Kalamazoo, "Kalamazoo"},               // 22
+    {Louisville, "Louisville"},             // 23
+    {Milwaukee, "Milwaukee"},               // 24
+    {Minneapolis, "Minneapolis"},           // 25
+    {Nashville, "Nashville"},               // 26
+    {Omaha, "Omaha"},                       // 27
+    {Pierre, "Pierre"},                     // 28
+    {Saginaw, "Saginaw"},                   // 29
+    {SouthBend, "South Bend"},              // 30
+    {SaintLouis, "Saint Louis"},            // 31
+    {TerreHaute, "Terre Haute"},            // 32
+    {Toledo, "Toledo"},                     // 33
+    {Winnepeg, "Winnepeg"},                 // 34
+    {Youngstown, "Youngstown"}              // 35
 };
 
 
@@ -105,14 +107,16 @@ std::map<int, std::string> CITIES_MAP {
 // @param graph [in] Directed graph that stores all of the vertices (cities)
 // @param source [in] The specified "starting point"
 // @param correctValues [in] An array that holds the correct values for output of dijkstra's algorithm
-template <class EnumType>
-void testTemplate(const Digraph& graph, EnumType source, std::vector<int> correctValues, bool bigData=false) {
+void testTemplate(const Digraph& graph, int source, std::vector<int> correctValues, bool bigData=false) {
 
     // formatting constants
     const int cityWidth = 36;
     const int valueWidth = 12;
 
-    std::cout << "## TEST " << source + 1 << ". Starting from " << CITIES_MAP[source] << "\n";
+    std::cout << "## TEST " << source + 1;
+
+    std::string startingCity = bigData ? CITIES_MAP[source + vertices] : CITIES_MAP[source];
+    std::cout << ". Starting from " << startingCity  << "\n";
 
     // table columns
     std::cout << "| Route                              |" << std::setw(valueWidth) << " Distance | Passed |\n";
@@ -123,15 +127,15 @@ void testTemplate(const Digraph& graph, EnumType source, std::vector<int> correc
     bool passed = true;
 
     // iterate through the cities
-    int endValue = bigData ? (int)Youngstown : (int)San_Francisco_CA;
-    for (int CITY = Atlanta_GA; CITY <= endValue; ++CITY) {
+    int endValue = bigData ? (int)(Youngstown-vertices) : (int)San_Francisco_CA;
+    for (int CITY = 0; CITY <= endValue; ++CITY) {
 
         // the current distance, for example: 595
-        int dist = graph.dijkstra(source, CITY);
+        int dist = graph.dijkstra(source , CITY);
 
         // the current route, for example: Miami_FL -> Atlanta_GA
-        std::string route;
-        route = CITIES_MAP[source] + " -> " + CITIES_MAP[CITY];
+        std::string route = bigData ? CITIES_MAP[source + vertices] + " -> " + CITIES_MAP[CITY + vertices] :
+                                      CITIES_MAP[source] + " -> " + CITIES_MAP[CITY];
 
         // output route
         std::cout << '|' << std::setw(cityWidth) << std::left << route;
@@ -152,8 +156,10 @@ void testTemplate(const Digraph& graph, EnumType source, std::vector<int> correc
     // output test summary
     if (passed)
         std::cout << "\nTEST " << source + 1 << " - Passed";
-    else
+    else {
         std::cout << "\n!! TEST " << source + 1 << " - Failed !!";
+        // @TODO add global fail call
+    }
 
     // padding
     std::cout << "\n\n";
@@ -213,7 +219,7 @@ void Test::testSuiteBig(const Digraph& graph) {
     };
 
     // test all cities
-    for(int city = 0; city < vertices; ++city)
+    for(int city = 0; city < verticesBig; ++city)
         testTemplate(graph, city, correctDistances[city], BIG_DATA);
 
 }
