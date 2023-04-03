@@ -10,10 +10,6 @@
 #include <string>
 #include <vector>
 
-// -----------------------------------DELETE EVENTUALLY
-#include <iostream>
-// -----------------------------------DELETE EVENTUALLY
-
 // Enumerated type to help keep track of wether a city has
 // been visited or not
 enum Status { NOT_VISITED, VISITED };
@@ -83,40 +79,6 @@ public:
     int isEdge(int source, int destination) const;
     int dijkstra(int source, int destination) const;
     Node* getVertex(int i) const { return vertices[i]; }
-
-    // -----------------------------------DELETE EVENTUALLY
-    // for debugging
-    void display() const {
-        for (auto edge:distMatrix) {
-            for(auto city:edge) {
-                std::cout << city << '\t';
-            }
-            std::cout << "\n\n\n";
-        }
-    }
-    void displayVertices() const {
-        std::cout << "Vertices:\n";
-        for (auto vertex:vertices) {
-            std::cout << vertex->getName() << ", ";
-
-            if (vertex->getStatus() == 0)
-                std::cout << "NOT_VISITED";
-            else if (vertex->getStatus() == 1)
-                std::cout << "VISITED";
-
-            std::cout << std::endl;
-        }
-        std::cout << std::endl;
-    }
-    void displayDijkstra() const {
-        for (int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 3; ++j) {
-                std::cout << dijkstra(i, j) << ", ";
-            }
-            std::cout << "";
-        }
-    }
-    // -----------------------------------DELETE EVENTUALLY
 
 private:
 

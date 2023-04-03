@@ -7,7 +7,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <exception>
 #include <cstring>
 #include <limits>
 #include "Digraph.hpp"
@@ -131,7 +130,7 @@ int main(int argc, char* argv[])
                 std::cin >> source;
 
                 // input validation
-                if(std::cin.fail()) {
+                if(std::cin.fail() || (source < 0 || source > directedGraph.getNumberOfVertices())) {
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
                     std::cout << "Invalid Input, enter a number from the table above: ";
@@ -151,7 +150,7 @@ int main(int argc, char* argv[])
                 std::cin >> destination;
 
                 // input validation
-                if(std::cin.fail()) {
+                if(std::cin.fail() || (source < 0 || source > directedGraph.getNumberOfVertices())) {
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
                     std::cout << "Invalid Input, enter a number from the table above: ";
