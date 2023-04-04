@@ -8,7 +8,7 @@ The commands are given in terms of `make`.
 
 ## Setup
 
-Verify that you are in the source directory. The `make` command will look for the makefile in the working directory.
+Verify that you are in the source directory. The `make` command will look for the [makefile](makefile) in the working directory.
 
 Once done, you can then perform the build:
 
