@@ -1,6 +1,6 @@
 # Build
 
-This file contains instructions on how to build and run the program.
+This file contains instructions on how to build and run the test_dijkstra program.
 
 This project supports an in-source build.
 
@@ -8,14 +8,19 @@ The commands are given in terms of `make`.
 
 ## Setup
 
-Verify that you are in the source directory.
-The `make` command will look for the makefile in the current directory.
+Verify that you are in the source directory. The `make` command will look for the makefile in the working directory.
 
 Once done, you can then perform the build:
 
 ```console
 make
 ```
+
+You can now run one of the following targets:
+- [run](#run)
+- [run_big](#run_big)
+- [test](#test)
+- [test_big](#test_big)
 
 ## run
 
