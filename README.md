@@ -14,6 +14,6 @@ In our application:
 Click [HERE](https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html) to see a visualization of the algorithm
 
 ## Running The Program
-For instructions on building and running this program, read `BUILD.md`
+For instructions on building and running this program, read [BUILD.md](BUILD.md)
 ___
 Copyright 2023 - Mark P. Earl. All Rights Reserved.
