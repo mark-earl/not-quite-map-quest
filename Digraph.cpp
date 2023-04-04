@@ -105,7 +105,7 @@ int Digraph::dijkstra(int source, int destination) const
     std::vector<bool> visited(numberOfVertices, false);
 
     // loop through all vertices
-    for (int i = 0; i < numberOfVertices; ++i) {
+    for (auto vertex:vertices) {
 
         // get the index of the vertex with the minimum distance from the source
         int minVertexIndex = minVertex(dist, visited);
