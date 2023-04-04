@@ -105,7 +105,7 @@ int Digraph::dijkstra(int source, int destination) const
     std::vector<bool> visited(numberOfVertices, false);
 
     // loop through all vertices
-    for (unsigned int i = 0; i < numberOfVertices; ++i) {
+    for (int i = 0; i < numberOfVertices; ++i) {
 
         // get the index of the vertex with the minimum distance from the source
         int minVertexIndex = minVertex(dist, visited);
@@ -114,7 +114,7 @@ int Digraph::dijkstra(int source, int destination) const
         visited[minVertexIndex] = true;
 
         // loop through all neighbors of the current vertex
-        for (unsigned int j = 0; j < numberOfVertices; ++j) {
+        for (int j = 0; j < numberOfVertices; ++j) {
 
             // if there is an edge between the current vertex and its neighbor
             if (isEdge(minVertexIndex, j) != -1) {
