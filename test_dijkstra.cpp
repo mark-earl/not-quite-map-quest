@@ -90,10 +90,9 @@ int main(int argc, char* argv[])
 
         do {
             // input prompt
-            std::cout << "Show full report?[Y/N]\n";
-            std::cout << "Full Report: All routes and distances are displayed\n";
-            std::cout << "Short Report: Only the test headers are displayed\n";
-            std::cout << "Please enter 'Y' or 'N':";
+            std::cout << "\nFull Report:  All routes and distances are displayed\n";
+            std::cout << "Short Report: Only test headers are displayed\n\n";
+            std::cout << "Show full report?[Y/N]:";
             std::cin >> fullReport;
 
             // input validation
@@ -103,7 +102,7 @@ int main(int argc, char* argv[])
                 std::cout<<"Invalid Input\n";
             }
         }
-        while(fullReport != 'N' && fullReport != 'Y'); // only accept 'Y' or 'N'
+        while(fullReport != 'N' && fullReport != 'Y' && fullReport != 'n' && fullReport != 'y'); // only accept 'y', 'n', 'Y', and 'N'
 
         // run the appropriate test suite
         if(bigData)
@@ -117,7 +116,7 @@ int main(int argc, char* argv[])
 
         char again = 'Y';
 
-        while (again == 'Y') {
+        while (again == 'Y' || again == 'y') {
 
             std::cout << "Select Starting City:\n";
             for (int i = 0; i < directedGraph.getNumberOfVertices(); ++i)
@@ -165,8 +164,7 @@ int main(int argc, char* argv[])
 
             do {
                 // input prompt
-                std::cout << "Again?[Y/N]\n";
-                std::cout << "Please enter 'Y' or 'N':";
+                std::cout << "Again?[Y/N]:";
                 std::cin >> again;
                 std::cout << std::endl;
 
@@ -177,7 +175,7 @@ int main(int argc, char* argv[])
                     std::cout<<"Invalid Input\n";
                 }
             }
-            while(again != 'N' && again != 'Y'); // only accept 'Y' or 'N'
+            while(again != 'N' && again != 'Y' && again != 'n' && again != 'y'); // only accept 'y', 'n', 'Y', and 'N'
         }
     }
 

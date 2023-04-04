@@ -12,10 +12,10 @@ TestSuite.o: TestSuite.cpp
 digraph.out: Digraph.o TestSuite.o test_dijkstra.cpp
 	@${CC} ${FLAGS} test_dijkstra.cpp *.o -o digraph.out
 	@echo \# Available targets:
-	@echo \`make run\`		- menu gui
-	@echo \`make test\` 	- test suite
-	@echo \`make run_big\` 	- menu gui with nqmqBig.dat
-	@echo \`make test_big\` - test suite with nqmqBig.dat
+	@echo \`make run\`\	 - menu gui
+	@echo \`make test\`\	 - test suite
+	@echo \`make run_big\`\	 - menu gui with nqmqBig.dat
+	@echo \`make test_big\`\  - test suite with nqmqBig.dat
 
 clean:
 	@rm -f *.o

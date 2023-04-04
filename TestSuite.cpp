@@ -79,7 +79,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
     std::cout << "## TEST " << source + 1 << ((source + 1 > 9) ? "." : ". ") << " Starting from " << std::setw(20) << std::left << startingCity;
 
     // table columns
-    if (fullReport == 'Y') {
+    if (fullReport == 'Y' || fullReport == 'y') {
         std::cout << "\n| Route                              | Distance | Passed |\n";
         std::cout <<   "|:-----------------------------------|---------:|:------:|\n";
     }
@@ -95,7 +95,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
         int dist = graph.dijkstra(source , CITY);
 
         // output route and distance
-        if (fullReport == 'Y') {
+        if (fullReport == 'Y' || fullReport == 'y') {
             std::cout << '|' << std::setw(cityWidth) << std::left << route;
             std::cout << '|' << std::setw(distWidth) << std::right << dist << '|';
         }
@@ -109,7 +109,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
         }
 
         // output passed condition
-        if (fullReport == 'Y')
+        if (fullReport == 'Y' || fullReport == 'y')
             std::cout << std::setw(passedWidth) << std::right << passedMessage << "|\n";
     }
 
@@ -122,7 +122,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
     }
 
     // output test summary
-    if (fullReport == 'Y')
+    if (fullReport == 'Y' || fullReport == 'y')
         std::cout << "\nTEST " << source + 1 << " - " << passedMessage << "\n\n";
     else
         std::cout << passedMessage << "\n";
