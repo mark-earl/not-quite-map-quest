@@ -4,6 +4,7 @@
     Implementation file for directed graph class
 */
 
+#include <vector>
 #include <string>
 #include <limits>
 #include "Digraph.hpp"
