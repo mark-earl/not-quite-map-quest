@@ -101,17 +101,18 @@ int Digraph::dijkstra(int source, int destination) const
     // set the distance from the source vertex to itself to 0
     dist[source] = 0;
 
-    // vector to store whether each vertex has been visited or not
-    std::vector<bool> visited(numberOfVertices, false);
+    // reset all status to not visited
+    for (auto& vertex:vertices)
+        vertex->setStatus(Status::NOT_VISITED);
 
     // loop through all vertices
     for (auto vertex:vertices) {
 
         // get the index of the vertex with the minimum distance from the source
-        int minVertexIndex = minVertex(dist, visited);
+        int minVertexIndex = minVertex(dist);
 
         // mark the vertex as visited
-        visited[minVertexIndex] = true;
+        vertices[minVertexIndex]->setStatus(Status::VISITED);
 
         // loop through all neighbors of the current vertex
         for (int j = 0; j < numberOfVertices; ++j) {
@@ -136,7 +137,7 @@ int Digraph::dijkstra(int source, int destination) const
     return dist[destination];
 }
 
-int Digraph::minVertex(const std::vector<int>& dist, const std::vector<bool>& visited) const {
+int Digraph::minVertex(const std::vector<int>& dist) const {
     // initialize the minimum distance to infinity
     int minDist = INFINITY;
 
@@ -147,7 +148,7 @@ int Digraph::minVertex(const std::vector<int>& dist, const std::vector<bool>& vi
     for (int i = 0; i < numberOfVertices; ++i) {
 
         // if the vertex has not been visited and its distance from the source is less than the current minimum distance
-        if (!visited[i] && dist[i] <= minDist) {
+        if (vertices[i]->getStatus() == Status::NOT_VISITED && dist[i] <= minDist) {
 
             // set the minimum distance to the distance of the current vertex from the source
             minDist = dist[i];

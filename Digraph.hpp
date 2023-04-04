@@ -10,6 +10,8 @@
 #include <string>
 #include <vector>
 
+#include <iostream>
+
 // Enumerated type to help keep track of wether a city has
 // been visited or not
 enum Status { NOT_VISITED, VISITED };
@@ -82,7 +84,7 @@ public:
 
 private:
 
-    int minVertex(const std::vector<int>& dist, const std::vector<bool>& visited) const;
+    int minVertex(const std::vector<int>& dist) const;
 
 };
 
