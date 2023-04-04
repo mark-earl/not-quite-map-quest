@@ -10,8 +10,6 @@
 #include <string>
 #include <vector>
 
-#include <iostream>
-
 // Enumerated type to help keep track of wether a city has
 // been visited or not
 enum Status { NOT_VISITED, VISITED };
@@ -75,12 +73,12 @@ public:
     void addVertex(std::string s);
     unsigned int getNumberOfVertices() const;
     unsigned int getNumberOfEdges() const;
+    Node* getVertex(int i) const;
     void resetEdges();
     void addEdge(int source, int destination, int weight);
     void deleteEdge(int source, int destination);
     int isEdge(int source, int destination) const;
     int dijkstra(int source, int destination) const;
-    Node* getVertex(int i) const { return vertices[i]; }
 
 private:
 

@@ -37,6 +37,10 @@ unsigned int Digraph::getNumberOfVertices() const { return numberOfVertices; }
 // @stereotype get
 unsigned int Digraph::getNumberOfEdges() const { return numberOfEdges; }
 
+// Returns the vertex at index `i`
+// @param i [in] The index of the vertex
+Node* Digraph::getVertex(int i) const { return vertices[i]; }
+
 // Resets all edge values to -1
 void Digraph::resetEdges() {
 
