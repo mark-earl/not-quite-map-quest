@@ -4,8 +4,8 @@
     Implementation file for the test suite on dijkstra's algorithm
 */
 
-#include "TestSuite.hpp"
-
+#include "test_suite.hpp"
+#include "Digraph.hpp"
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -133,7 +133,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
 // @param graph [in] The graph represented as an adjacency matrix
 // @param fullReport [in] Determines the output format [Y/N]
 // @param bigData [in] Determines the input for the algorithm (false by default)
-void Test::testSuite(const Digraph& graph, bool fullReport, bool bigData) {
+void testSuite(const Digraph& graph, bool fullReport, bool bigData) {
 
     // holds the correct values for each test
     std::vector<std::vector<int>> correctDistances;

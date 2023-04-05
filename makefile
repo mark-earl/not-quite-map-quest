@@ -6,10 +6,10 @@ all: digraph.out clean
 Digraph.o: Digraph.cpp
 	@${CC} ${FLAGS} -c Digraph.cpp
 
-TestSuite.o: TestSuite.cpp
-	@${CC} ${FLAGS} -c TestSuite.cpp
+test_suite.o: test_suite.cpp
+	@${CC} ${FLAGS} -c test_suite.cpp
 
-digraph.out: Digraph.o TestSuite.o test_dijkstra.cpp
+digraph.out: Digraph.o test_suite.o test_dijkstra.cpp
 	@${CC} ${FLAGS} test_dijkstra.cpp *.o -o digraph.out
 	@echo \# Available targets:
 	@echo \`make run\`\	 - menu gui

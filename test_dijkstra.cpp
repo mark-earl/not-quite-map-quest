@@ -10,10 +10,21 @@
 #include <cstring>
 #include <limits>
 #include "Digraph.hpp"
-#include "TestSuite.hpp"
+#include "test_suite.hpp"
 
+// Read data from either `nqmq.dat` or `nqmqBig.dat` into `directedGraph`
+// @param directedGraph [out] The adjacency matrix storing the nodes
+// @param bigData [in] Flag to determine wether to use `nqmq.dat` or `nqmqBig.dat`
 void readData(Digraph& directedGraph, bool bigData);
+
+// Runs a menu-based UI for testing dijkstra's algorithm
+// @parm directedGraph [in] The adjacency matrix storing the nodes
 void runMenu(const Digraph& directedGraph);
+
+// Runs a test suite on dijkstra's algorithm by trying all combinations of nodes in `directedGraph`
+// @parm directedGraph [in] The adjacency matrix storing the nodes
+// @param bigData [in] Flag to determine wether to use `nqmq.dat` or `nqmqBig.dat`
+// @param fullReport [in] Flag to control output
 void runTest(const Digraph& directedGraph, bool bigData, bool fullReport);
 
 int main(int argc, char* argv[])
@@ -34,6 +45,7 @@ int main(int argc, char* argv[])
             fullReport = false;
     }
 
+    // the adjacency matrix
     Digraph directedGraph;
 
     // read data into graph
@@ -52,6 +64,8 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+// Runs a menu-based UI for testing dijkstra's algorithm
+// @parm directedGraph [in] The adjacency matrix storing the nodes
 void runMenu(const Digraph& directedGraph) {
 
     char again = 'Y';
@@ -119,16 +133,17 @@ void runMenu(const Digraph& directedGraph) {
     }
 }
 
+// Runs a test suite on dijkstra's algorithm by trying all combinations of nodes in `directedGraph`
+// @parm directedGraph [in] The adjacency matrix storing the nodes
+// @param bigData [in] Flag to determine wether to use `nqmq.dat` or `nqmqBig.dat`
+// @param fullReport [in] Flag to control output
 void runTest(const Digraph& directedGraph, bool bigData, bool fullReport) {
-
-    // test object
-    Test test;
 
     // run the appropriate test suite
     if(bigData)
-        test.testSuite(directedGraph, fullReport, bigData);
+        testSuite(directedGraph, fullReport, bigData);
     else
-        test.testSuite(directedGraph, fullReport);
+        testSuite(directedGraph, fullReport);
 }
 
 void readData(Digraph& directedGraph, bool bigData) {
