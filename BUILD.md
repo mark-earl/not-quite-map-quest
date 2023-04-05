@@ -112,7 +112,7 @@ To run on the command line:
 
 ## Checking For Memory Leaks
 
-Using `valgrind` you can check this program for memory leaks. Run the following command:
+Using `valgrind` you can check this program for memory leaks. Run the following:
 
 ```console
 g++ -std=c++17 -g  -Wall test_dijkstra.cpp Digraph.cpp test_suite.cpp -o Debug
