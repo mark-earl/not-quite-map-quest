@@ -97,6 +97,9 @@ int Digraph::isEdge (int source, int destination) const
     return distMatrix[source][destination];
 }
 
+// Destructor, Frees all allocated memory
+Digraph::~Digraph() { for (auto& vertex:vertices) delete vertex;}
+
 // Compute shortest path distances from `source` to `destination`
 // @param `source` The index of the source city.
 // @param `destination` The index of the destination city.

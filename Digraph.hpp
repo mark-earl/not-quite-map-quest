@@ -115,8 +115,8 @@ public:
     // @returns The distance between source and destination
     int dijkstra(int source, int destination) const;
 
-    // Frees the allocated memory
-    ~Digraph() { for (auto& vertex:vertices) delete vertex;}
+    // Destructor, Frees all allocated memory
+    ~Digraph();
 
 private:
 
