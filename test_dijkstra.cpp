@@ -9,6 +9,7 @@
 #include <string>
 #include <cstring>
 #include <limits>
+#include <vector>
 #include "Digraph.hpp"
 #include "test_suite.hpp"
 
@@ -17,15 +18,15 @@
 // @param bigData [in] Flag to determine wether to use `nqmq.dat` or `nqmqBig.dat`
 void readData(Digraph& directedGraph, bool bigData);
 
-// Runs a menu-based UI for testing dijkstra's algorithm
-// @parm directedGraph [in] The adjacency matrix storing the nodes
-void runMenu(const Digraph& directedGraph);
-
 // Runs a test suite on dijkstra's algorithm by trying all combinations of nodes in `directedGraph`
 // @parm directedGraph [in] The adjacency matrix storing the nodes
 // @param bigData [in] Flag to determine wether to use `nqmq.dat` or `nqmqBig.dat`
 // @param fullReport [in] Flag to control output
 void runTest(const Digraph& directedGraph, bool bigData, bool fullReport);
+
+// Runs a menu-based UI for testing dijkstra's algorithm
+// @parm directedGraph [in] The adjacency matrix storing the nodes
+void runMenu(const Digraph& directedGraph);
 
 int main(int argc, char* argv[])
 {
@@ -64,88 +65,9 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-// Runs a menu-based UI for testing dijkstra's algorithm
-// @parm directedGraph [in] The adjacency matrix storing the nodes
-void runMenu(const Digraph& directedGraph) {
-
-    char again = 'Y';
-
-    while (again == 'Y' || again == 'y') {
-
-        std::cout << "Select Starting City:\n";
-        for (int i = 0; i < directedGraph.getNumberOfVertices(); ++i)
-            std::cout << i + 1 << ") " << directedGraph.getVertex(i)->getName() << '\n';
-
-        int source = -1;
-
-        do {
-            // input prompt
-            std::cin >> source;
-
-            // input validation
-            if(std::cin.fail() || (source < 0 || source > directedGraph.getNumberOfVertices())) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-                std::cout << "Invalid Input, enter a number from the table above: ";
-                source = -1;
-            }
-        }
-        while(source < 0 || source > directedGraph.getNumberOfVertices());
-
-        std::cout << "Select Ending City:\n";
-        for (int i = 0; i < directedGraph.getNumberOfVertices(); ++i)
-            std::cout << i + 1 << ") " << directedGraph.getVertex(i)->getName() << '\n';
-
-        int destination = -1;
-
-        do {
-            // input prompt
-            std::cin >> destination;
-
-            // input validation
-            if(std::cin.fail() || (source < 0 || source > directedGraph.getNumberOfVertices())) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-                std::cout << "Invalid Input, enter a number from the table above: ";
-                destination = -1;
-            }
-        }
-        while(destination < 0 || destination > directedGraph.getNumberOfVertices());
-
-        std::cout << "\nThe distance between " << directedGraph.getVertex(source - 1)->getName();
-        std::cout << " and " << directedGraph.getVertex(destination - 1)->getName();
-        std::cout << " is: " << directedGraph.dijkstra(source - 1, destination - 1) << "\n\n";
-
-        do {
-            // input prompt
-            std::cout << "Again?[Y/N]:";
-            std::cin >> again;
-            std::cout << std::endl;
-
-            // input validation
-            if(std::cin.fail()) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-                std::cout<<"Invalid Input\n";
-            }
-        }
-        while(again != 'N' && again != 'Y' && again != 'n' && again != 'y'); // only accept 'y', 'n', 'Y', and 'N'
-    }
-}
-
-// Runs a test suite on dijkstra's algorithm by trying all combinations of nodes in `directedGraph`
-// @parm directedGraph [in] The adjacency matrix storing the nodes
+// Read data from either `nqmq.dat` or `nqmqBig.dat` into `directedGraph`
+// @param directedGraph [out] The adjacency matrix storing the nodes
 // @param bigData [in] Flag to determine wether to use `nqmq.dat` or `nqmqBig.dat`
-// @param fullReport [in] Flag to control output
-void runTest(const Digraph& directedGraph, bool bigData, bool fullReport) {
-
-    // run the appropriate test suite
-    if(bigData)
-        testSuite(directedGraph, fullReport, bigData);
-    else
-        testSuite(directedGraph, fullReport);
-}
-
 void readData(Digraph& directedGraph, bool bigData) {
 
     // open the appropriate input file
@@ -198,4 +120,80 @@ void readData(Digraph& directedGraph, bool bigData) {
 
     // close the input file once done reading
     dataFile.close();
+}
+
+// Runs a test suite on dijkstra's algorithm by trying all combinations of nodes in `directedGraph`
+// @parm directedGraph [in] The adjacency matrix storing the nodes
+// @param bigData [in] Flag to determine wether to use `nqmq.dat` or `nqmqBig.dat`
+// @param fullReport [in] Flag to control output
+void runTest(const Digraph& directedGraph, bool bigData, bool fullReport) {
+
+    // run the appropriate test suite
+    if(bigData)
+        testSuite(directedGraph, fullReport, bigData);
+    else
+        testSuite(directedGraph, fullReport);
+}
+
+// Runs a menu-based UI for testing dijkstra's algorithm
+// @parm directedGraph [in] The adjacency matrix storing the nodes
+void runMenu(const Digraph& directedGraph) {
+
+    // allows for repeated use of the menu system
+    char again = 'Y';
+
+    // main loop
+    while (again == 'Y' || again == 'y') {
+
+        // values from the displayed menu
+        std::vector<int> cities = {-1, -1};
+
+        // display available cities
+        for (int i = 0; i < directedGraph.getNumberOfVertices(); ++i)
+                std::cout << i + 1 << ( i + 1 < 10 ? ")  ":") ") << directedGraph.getVertex(i)->getName() << '\n';
+
+        // pick starting and ending cities
+        for (int i = 0; i < cities.size(); ++i) {
+            // select city
+            std::cout << "Select " << (!i ? "Starting":"Ending") << " City: ";
+
+            do {
+                // input city index
+                std::cin >> cities[i];
+
+                // validate input
+                if(std::cin.fail() || (cities[i] < 1 || cities[i] > directedGraph.getNumberOfVertices())) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                    std::cout << "Invalid Input, enter a number from the table above: ";
+                    cities[i] = -1;
+                }
+            }
+            while(cities[i] < 1 || cities[i] > directedGraph.getNumberOfVertices()); // range: [1, numberOfVertices]
+        }
+
+        // output distance between the two cities
+        int sourceIndex = cities[0] - 1;
+        int destinationIndex = cities[1] - 1;
+        std::cout << "\nThe distance between " << directedGraph.getVertex(sourceIndex)->getName();
+        std::cout << " and " << directedGraph.getVertex(destinationIndex)->getName();
+        std::cout << " is: " << directedGraph.dijkstra(sourceIndex, destinationIndex) << "\n\n";
+
+        // prompt user if they want to go again
+        std::cout << "Again?[Y/N]:";
+
+        do {
+
+            // input choice
+            std::cin >> again;
+
+            // validate choice
+            if(std::cin.fail() || again != 'N' && again != 'Y' && again != 'n' && again != 'y') {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                std::cout<<"Invalid Input, enter 'Y' or 'N':";
+            }
+        }
+        while(again != 'N' && again != 'Y' && again != 'n' && again != 'y'); // only accept 'y', 'n', 'Y', and 'N'
+    }
 }
