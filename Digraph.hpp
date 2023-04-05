@@ -10,11 +10,10 @@
 #include <string>
 #include <vector>
 
-// Enumerated type to help keep track of wether a city has
-// been visited or not
+// keep track of wether a city has been visited or not
 enum Status { NOT_VISITED, VISITED };
 
-// Helper class, represents nodes on a directional graph.
+// Helper class, represents nodes on a graph.
 // In our case, each node is a city
 class Node {
 
@@ -29,7 +28,8 @@ private:
 
 public:
 
-    // constructor
+    // Constructor. Marks node as not visited and assigns them a name
+    // @param cityName [in] The name of the city
     Node(std::string cityName) {
         name = cityName;
         status = Status::NOT_VISITED;
@@ -68,23 +68,61 @@ private:
     // the values are weights(distances)
     std::vector<std::vector<int>> distMatrix;
 
-
-
 public:
 
-    void addVertex(std::string s);
+    // Returns the number of vertices
+    // @stereotype get
     int getNumberOfVertices() const;
+
+    // Returns the number of edges
+    // @stereotype get
     int getNumberOfEdges() const;
+
+    // Returns the vertex at index `i`
+    // @param i [in] The index of the vertex
     Node* getVertex(int i) const;
+
+    // Adds the city named `cityName` to the directed graph
+    // @param cityName [in] The name of the city
+    void addVertex(std::string cityName);
+
+    // Resets all edge values to -1, indicating a complete absence of edges
     void resetEdges();
+
+    // If there is not already an edge that directly connects
+    // `source` to `destination`, it is added
+    // @param source The index of the source city
+    // @param destination The index of the destination city
+    // @param weight The distance between `source` and `destination`
     void addEdge(int source, int destination, int weight);
+
+    // If there is an edge that directly connects `source` to
+    // `destination`, it is deleted
+    // @param source The index of the source city
+    // @param destination The index of the destination city
     void deleteEdge(int source, int destination);
+
+    // Checks to see if an edge exists that directly connects `source` to `destination`
+    // @param source The index of the source city
+    // @param destination The index of the destination city
+    // @return An integer representing the distance between `source` and `destination`
+    // @retval -1 An edge DOES NOT exist that directly connects `source` to `destination`
     int isEdge(int source, int destination) const;
+
+    // Compute shortest path distances from `source` to `destination`
+    // @param `source` The index of the source city.
+    // @param `destination` The index of the destination city.
+    // @returns The distance between source and destination
     int dijkstra(int source, int destination) const;
+
+    // Frees the allocated memory
     ~Digraph() { for (auto& vertex:vertices) delete vertex;}
 
 private:
 
+    // Returns the vertex with the minimum distance
+    // @param dist [in] The vector holding the distances to all the cities from a single-source
+    // @returns The index of the vertex with the minimum distance
     int minVertex(const std::vector<int>& dist) const;
 
 };

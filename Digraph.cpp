@@ -12,12 +12,12 @@
 // 2147483647
 const int INFINITY = std::numeric_limits<int>::max();
 
-// Adds the city named `id` to the directed graph
-// @param id [in] The name of the city
-void Digraph::addVertex(std::string id) {
+// Adds the city named `cityName` to the directed graph
+// @param cityName [in] The name of the city
+void Digraph::addVertex(std::string cityName) {
 
     // add the new city
-    Node* newNode = new Node(id);
+    Node* newNode = new Node(cityName);
     vertices.push_back(newNode);
     ++numberOfVertices;
 
@@ -42,7 +42,7 @@ int Digraph::getNumberOfEdges() const { return numberOfEdges; }
 // @param i [in] The index of the vertex
 Node* Digraph::getVertex(int i) const { return vertices[i]; }
 
-// Resets all edge values to -1
+// Resets all edge values to -1, indicating a complete absence of edges
 void Digraph::resetEdges() {
 
     // assign edge values to -1
@@ -98,6 +98,9 @@ int Digraph::isEdge (int source, int destination) const
 }
 
 // Compute shortest path distances from `source` to `destination`
+// @param `source` The index of the source city.
+// @param `destination` The index of the destination city.
+// @returns The distance between source and destination
 int Digraph::dijkstra(int source, int destination) const
 {
     // vector to store the minimum distance from the source vertex to each vertex
@@ -146,6 +149,9 @@ int Digraph::dijkstra(int source, int destination) const
     return dist[destination];
 }
 
+// Returns the vertex with the minimum distance
+// @param dist [in] The vector holding the distances to all the cities from a single-source
+// @returns The index of the vertex with the minimum distance
 int Digraph::minVertex(const std::vector<int>& dist) const {
     // initialize the minimum distance to infinity
     int minDist = INFINITY;
