@@ -24,9 +24,13 @@ clean:
 
 run:
 	@./digraph.out
-test:
-	@./digraph.out test
 run_big:
 	@./digraph.out big
+test:
+	@./digraph.out test
 test_big:
 	@./digraph.out big test
+test_summary:
+	@./digraph.out test summary
+test_big_summary:
+	@./digraph.out big test summary

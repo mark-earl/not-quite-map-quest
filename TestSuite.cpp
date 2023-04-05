@@ -64,7 +64,7 @@ std::map<int, std::string> CITIES_MAP {
 // @param source [in] The specified "starting point"
 // @param correctValues [in] An array that holds the correct values for output of dijkstra's algorithm
 // @param bigData [in] Flag indicating whether we are using the big data file or not
-void testTemplate(const Digraph& graph, int source, const std::vector<int>& correctValues, char fullReport, bool bigData, bool& passedAllTests) {
+void testTemplate(const Digraph& graph, int source, const std::vector<int>& correctValues, bool fullReport, bool bigData, bool& passedAllTests) {
 
     // formatting constants
     const int cityWidth = 36;
@@ -79,7 +79,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
     std::cout << "## TEST " << source + 1 << ((source + 1 > 9) ? "." : ". ") << " Starting from " << std::setw(20) << std::left << startingCity;
 
     // table columns
-    if (fullReport == 'Y' || fullReport == 'y') {
+    if (fullReport) {
         std::cout << "\n| Route                              | Distance | Passed |\n";
         std::cout <<   "|:-----------------------------------|---------:|:------:|\n";
     }
@@ -95,7 +95,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
         int dist = graph.dijkstra(source , CITY);
 
         // output route and distance
-        if (fullReport == 'Y' || fullReport == 'y') {
+        if (fullReport) {
             std::cout << '|' << std::setw(cityWidth) << std::left << route;
             std::cout << '|' << std::setw(distWidth) << std::right << dist << '|';
         }
@@ -109,7 +109,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
         }
 
         // output passed condition
-        if (fullReport == 'Y' || fullReport == 'y')
+        if (fullReport)
             std::cout << std::setw(passedWidth) << std::right << passedMessage << "|\n";
     }
 
@@ -122,7 +122,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
     }
 
     // output test summary
-    if (fullReport == 'Y' || fullReport == 'y')
+    if (fullReport)
         std::cout << "\nTEST " << source + 1 << " - " << passedMessage << "\n\n";
     else
         std::cout << passedMessage << "\n";
@@ -133,7 +133,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
 // @param graph [in] The graph represented as an adjacency matrix
 // @param fullReport [in] Determines the output format [Y/N]
 // @param bigData [in] Determines the input for the algorithm (false by default)
-void Test::testSuite(const Digraph& graph, char fullReport, bool bigData) {
+void Test::testSuite(const Digraph& graph, bool fullReport, bool bigData) {
 
     // holds the correct values for each test
     std::vector<std::vector<int>> correctDistances;

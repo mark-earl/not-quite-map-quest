@@ -15,7 +15,7 @@ class Test {
         // @param graph [in] The graph represented as an adjacency matrix
         // @param fullReport [in] Determines the output format [Y/N]
         // @param bigData [in] Determines the input for the algorithm (false by default)
-        void testSuite(const Digraph& graph, char fullReport, bool bigData = false);
+        void testSuite(const Digraph& graph, bool fullReport, bool bigData = false);
 };
 
 #endif // TEST_SUITE_HPP
