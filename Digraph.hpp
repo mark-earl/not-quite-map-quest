@@ -51,6 +51,7 @@ public:
     }
 };
 
+// Class representing a directed graph
 class Digraph {
 
 private:
