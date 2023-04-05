@@ -56,10 +56,10 @@ class Digraph {
 private:
 
     // number of vertices (cities) in the graph (map)
-    unsigned int numberOfVertices = 0;
+    int numberOfVertices = 0;
 
     // number of edges (routes) in the graph (map)
-    unsigned int numberOfEdges = 0;
+    int numberOfEdges = 0;
 
     // vector of pointers to nodes (cities)
     std::vector<Node*> vertices;
@@ -68,17 +68,20 @@ private:
     // the values are weights(distances)
     std::vector<std::vector<int>> distMatrix;
 
+
+
 public:
 
     void addVertex(std::string s);
-    unsigned int getNumberOfVertices() const;
-    unsigned int getNumberOfEdges() const;
+    int getNumberOfVertices() const;
+    int getNumberOfEdges() const;
     Node* getVertex(int i) const;
     void resetEdges();
     void addEdge(int source, int destination, int weight);
     void deleteEdge(int source, int destination);
     int isEdge(int source, int destination) const;
     int dijkstra(int source, int destination) const;
+    ~Digraph() { for (auto& vertex:vertices) delete vertex;}
 
 private:
 

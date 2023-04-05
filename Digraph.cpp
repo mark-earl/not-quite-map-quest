@@ -32,11 +32,11 @@ void Digraph::addVertex(std::string id) {
 
 // Returns the number of vertices
 // @stereotype get
-unsigned int Digraph::getNumberOfVertices() const { return numberOfVertices; }
+int Digraph::getNumberOfVertices() const { return numberOfVertices; }
 
 // Returns the number of edges
 // @stereotype get
-unsigned int Digraph::getNumberOfEdges() const { return numberOfEdges; }
+int Digraph::getNumberOfEdges() const { return numberOfEdges; }
 
 // Returns the vertex at index `i`
 // @param i [in] The index of the vertex
