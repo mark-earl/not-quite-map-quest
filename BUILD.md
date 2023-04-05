@@ -122,6 +122,4 @@ rm Debug
 
 There will be a lot of output, you want to look for this line at the end of it all:
 
-```console
-All heap blocks were freed -- no leaks are possible
-```
+    All heap blocks were freed -- no leaks are possible
