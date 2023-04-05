@@ -84,6 +84,6 @@ Using `valgrind` you can check this program for memory leaks. Run the following 
 
 ```console
 g++ -std=c++17 -g  -Wall test_dijkstra.cpp Digraph.cpp TestSuite.cpp -o Debug
-valgrind -v --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./Debug test big | tail -10
+valgrind -v --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./Debug test big
 n
 ```
