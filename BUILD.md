@@ -24,7 +24,9 @@ You can now run one of the following targets:
 - [test_summary](#test_summary)
 - [test_big_summary](#test_big_summary)
 
-## run
+## Make Targets
+
+### run
 
 Test dijkstra's algorithm by selecting cities from nqmq.dat
 
@@ -38,7 +40,7 @@ To run on the command line:
 ./digraph.out
 ```
 
-## run_big
+### run_big
 
 Test dijkstra's algorithm by selecting cities from nqmqBig.dat
 
@@ -52,7 +54,7 @@ To run on the command line:
 ./digraph.out big
 ```
 
-## test
+### test
 
 Test dijkstra's algorithm using all possible city combinations in nqmq.dat
 
@@ -66,7 +68,7 @@ To run on the command line:
 ./digraph.out test
 ```
 
-## test_big
+### test_big
 
 Test dijkstra's algorithm using all possible city combinations in nqmqBig.dat
 
@@ -80,7 +82,7 @@ To run on the command line:
 ./digraph.out big test
 ```
 
-## test_summary
+### test_summary
 
 Test dijkstra's algorithm using all possible city combinations in nqmq.dat with abbreviated output
 
@@ -94,7 +96,7 @@ To run on the command line:
 ./digraph.out test summary
 ```
 
-## test_big_summary
+### test_big_summary
 
 Test dijkstra's algorithm using all possible city combinations in nqmqBig.dat with abbreviated output
 
@@ -116,5 +118,3 @@ Using `valgrind` you can check this program for memory leaks. Run the following 
 g++ -std=c++17 -g  -Wall test_dijkstra.cpp Digraph.cpp TestSuite.cpp -o Debug
 valgrind -v --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./Debug test big summary
 ```
-
-NOTE: You will have to enter either 'Y' or 'N' when prompted
