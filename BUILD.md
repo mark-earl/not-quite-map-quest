@@ -21,6 +21,8 @@ You can now run one of the following targets:
 - [run_big](#run_big)
 - [test](#test)
 - [test_big](#test_big)
+- [test_summary](#test_summary)
+- [test_big_summary](#test_big_summary)
 
 ## run
 

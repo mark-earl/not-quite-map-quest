@@ -11,7 +11,7 @@
 
 // Tests dijkstra's algorithm
 // @param graph [in] The graph represented as an adjacency matrix
-// @param fullReport [in] Determines the output format [Y/N]
+// @param fullReport [in] Determines the output format
 // @param bigData [in] Determines the input for the algorithm (false by default)
 void testSuite(const Digraph& graph, bool fullReport, bool bigData = false);
 

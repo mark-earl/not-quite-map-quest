@@ -15,7 +15,7 @@
 const int VERTICES = 8;
 const int VERTICES_BIG = 28;
 
-// Map the city indexes to their names
+// map the city indexes to their names
 std::map<int, std::string> CITIES_MAP {
 
     // nqmq.dat
@@ -63,7 +63,9 @@ std::map<int, std::string> CITIES_MAP {
 // @param graph [in] Directed graph that stores all of the vertices (cities)
 // @param source [in] The specified "starting point"
 // @param correctValues [in] An array that holds the correct values for output of dijkstra's algorithm
-// @param bigData [in] Flag indicating whether we are using the big data file or not
+// @param fullReport [in] Determines the output format
+// @param bigData [in] Indicates whether we are using nqmqBig.dat or not
+// @param passedAllTests [in] Indicates if all tests passed or not
 void testTemplate(const Digraph& graph, int source, const std::vector<int>& correctValues, bool fullReport, bool bigData, bool& passedAllTests) {
 
     // formatting constants
@@ -131,7 +133,7 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
 
 // Tests dijkstra's algorithm
 // @param graph [in] The graph represented as an adjacency matrix
-// @param fullReport [in] Determines the output format [Y/N]
+// @param fullReport [in] Determines the output format
 // @param bigData [in] Determines the input for the algorithm (false by default)
 void testSuite(const Digraph& graph, bool fullReport, bool bigData) {
 
