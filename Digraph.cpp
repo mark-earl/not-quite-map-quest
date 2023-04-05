@@ -116,6 +116,7 @@ int Digraph::dijkstra(int source, int destination) const
         // get the index of the vertex with the minimum distance from the source
         int minVertexIndex = minVertex(dist);
 
+        // check if we found the destination
         if (minVertexIndex == destination)
             break;
 
