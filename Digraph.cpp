@@ -102,12 +102,11 @@ int Digraph::isEdge (int source, int destination) const
 Digraph::~Digraph() { for (auto& vertex:vertices) delete vertex;}
 
 // Compute shortest path distances from `source` to `destination`
-    // @param `source` The index of the source city.
-    // @param `destination` The index of the destination city.
-    // @param `path` A string that holds the path between the cities
-    // @param `usingMenu` Flag to control output of paths between cities
+// @param `source` The index of the source city.
+// @param `destination` The index of the destination city.
+// @param `path` A string that holds the path between the cities
 // @returns The distance between source and destination
-int Digraph::dijkstra(int source, int destination, std::string& path, bool usingMenu) const
+int Digraph::dijkstra(int source, int destination, std::string& path) const
 {
     // vector to store the minimum distance from the source vertex to each vertex
     std::vector<int> dist(numberOfVertices, INFINITY);
@@ -119,10 +118,8 @@ int Digraph::dijkstra(int source, int destination, std::string& path, bool using
     for (auto& vertex:vertices)
         vertex->setStatus(Status::NOT_VISITED);
 
-    // path starts at the source
-    if (usingMenu) {
-        path += vertices[source]->getName();
-    }
+    // vector to store the previous vertex for each vertex in the graph
+    std::vector<int> prev(numberOfVertices, -1);
 
     // loop through all vertices
     for (auto vertex:vertices) {
@@ -130,30 +127,43 @@ int Digraph::dijkstra(int source, int destination, std::string& path, bool using
         // get the index of the vertex with the minimum distance from the source
         int minVertexIndex = minVertex(dist);
 
-        if (usingMenu && minVertexIndex != source)
-            path += ("->" + vertices[minVertexIndex]->getName());
-
         // check if we found the destination
-        if (minVertexIndex == destination)
+        if (minVertexIndex == destination) {
+
+            // reconstruct the shortest path
+            int currentVertex = destination;
+            while (currentVertex != source) {
+                path = vertices[currentVertex]->getName() + " -> " + path;
+                currentVertex = prev[currentVertex];
+            }
+            path = "PATH: " + vertices[source]->getName() + " -> " + path;
+
+            // remove last " -> "
+            path = path.substr(0, path.size()-4);
+
             break;
+        }
 
         // mark the vertex as visited
         vertices[minVertexIndex]->setStatus(Status::VISITED);
 
         // loop through all neighbors of the current vertex
-        for (int j = 0; j < numberOfVertices; ++j) {
+        for (int i = 0; i < numberOfVertices; ++i) {
 
             // if there is an edge between the current vertex and its neighbor
-            if (isEdge(minVertexIndex, j) != -1) {
+            if (isEdge(minVertexIndex, i) != -1) {
 
                 // calculate the distance to the neighbor through the current vertex
-                int alt = dist[minVertexIndex] + isEdge(minVertexIndex, j);
+                int alt = dist[minVertexIndex] + isEdge(minVertexIndex, i);
 
                 // if the new distance is shorter than the current distance
-                if (alt < dist[j]) {
+                if (alt < dist[i]) {
 
                     // update the distance to the neighbor
-                    dist[j] = alt;
+                    dist[i] = alt;
+
+                    // update the previous vertex for the neighbor
+                    prev[i] = minVertexIndex;
                 }
             }
         }

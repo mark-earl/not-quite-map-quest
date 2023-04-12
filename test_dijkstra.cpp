@@ -177,9 +177,8 @@ void runMenu(const Digraph& directedGraph) {
         int destinationIndex = cities[1] - 1;
         std::cout << "\nThe distance between " << directedGraph.getVertex(sourceIndex)->getName();
         std::cout << " and " << directedGraph.getVertex(destinationIndex)->getName();
-        bool usingMenu = true;
-        std::string path = "PATH: ";
-        std::cout << " is: " << directedGraph.dijkstra(sourceIndex, destinationIndex, path, usingMenu) << '\n';
+        std::string path;
+        std::cout << " is: " << directedGraph.dijkstra(sourceIndex, destinationIndex, path) << '\n';
 
         // output path
         if (path.find("->") == std::string::npos) {
