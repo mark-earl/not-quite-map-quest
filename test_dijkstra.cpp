@@ -178,8 +178,18 @@ void runMenu(const Digraph& directedGraph) {
         std::cout << "\nThe distance between " << directedGraph.getVertex(sourceIndex)->getName();
         std::cout << " and " << directedGraph.getVertex(destinationIndex)->getName();
         bool usingMenu = true;
-        std::string path;
-        std::cout << " is: " << directedGraph.dijkstra(sourceIndex, destinationIndex, path, usingMenu) << '\n' << path << "\n\n";
+        std::string path = "PATH: ";
+        std::cout << " is: " << directedGraph.dijkstra(sourceIndex, destinationIndex, path, usingMenu) << '\n';
+
+        // output path
+        if (path.find("->") == std::string::npos) {
+            std::cout << "PATH: You didn't go anywhere.";
+        }
+        else {
+            std::cout << path;
+        }
+
+        std::cout << "\n\n";
 
         // prompt user if they want to go again
         std::cout << "Again?[Y/N]:";

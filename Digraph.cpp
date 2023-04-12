@@ -109,21 +109,20 @@ Digraph::~Digraph() { for (auto& vertex:vertices) delete vertex;}
 // @returns The distance between source and destination
 int Digraph::dijkstra(int source, int destination, std::string& path, bool usingMenu) const
 {
-    // path between the cities
-    path += "PATH: ";
-
     // vector to store the minimum distance from the source vertex to each vertex
     std::vector<int> dist(numberOfVertices, INFINITY);
 
     // set the distance from the source vertex to itself to 0
     dist[source] = 0;
 
-    if (usingMenu)
-        path += vertices[source]->getName();
-
     // reset all status to not visited
     for (auto& vertex:vertices)
         vertex->setStatus(Status::NOT_VISITED);
+
+    // path starts at the source
+    if (usingMenu) {
+        path += vertices[source]->getName();
+    }
 
     // loop through all vertices
     for (auto vertex:vertices) {
@@ -131,7 +130,7 @@ int Digraph::dijkstra(int source, int destination, std::string& path, bool using
         // get the index of the vertex with the minimum distance from the source
         int minVertexIndex = minVertex(dist);
 
-        if (usingMenu)
+        if (usingMenu && minVertexIndex != source)
             path += ("->" + vertices[minVertexIndex]->getName());
 
         // check if we found the destination
