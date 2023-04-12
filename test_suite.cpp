@@ -94,7 +94,8 @@ void testTemplate(const Digraph& graph, int source, const std::vector<int>& corr
 
         // get route and distance
         std::string route = CITIES_MAP[source + indexOffset] + " -> " + CITIES_MAP[CITY + indexOffset];
-        int dist = graph.dijkstra(source , CITY);
+        std::string dummy;
+        int dist = graph.dijkstra(source , CITY, dummy);
 
         // output route and distance
         if (fullReport) {

@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <limits>
+#include <iostream>
 #include "Digraph.hpp"
 
 // 2147483647
@@ -101,16 +102,24 @@ int Digraph::isEdge (int source, int destination) const
 Digraph::~Digraph() { for (auto& vertex:vertices) delete vertex;}
 
 // Compute shortest path distances from `source` to `destination`
-// @param `source` The index of the source city.
-// @param `destination` The index of the destination city.
+    // @param `source` The index of the source city.
+    // @param `destination` The index of the destination city.
+    // @param `path` A string that holds the path between the cities
+    // @param `usingMenu` Flag to control output of paths between cities
 // @returns The distance between source and destination
-int Digraph::dijkstra(int source, int destination) const
+int Digraph::dijkstra(int source, int destination, std::string& path, bool usingMenu) const
 {
+    // path between the cities
+    path += "PATH: ";
+
     // vector to store the minimum distance from the source vertex to each vertex
     std::vector<int> dist(numberOfVertices, INFINITY);
 
     // set the distance from the source vertex to itself to 0
     dist[source] = 0;
+
+    if (usingMenu)
+        path += vertices[source]->getName();
 
     // reset all status to not visited
     for (auto& vertex:vertices)
@@ -121,6 +130,9 @@ int Digraph::dijkstra(int source, int destination) const
 
         // get the index of the vertex with the minimum distance from the source
         int minVertexIndex = minVertex(dist);
+
+        if (usingMenu)
+            path += ("->" + vertices[minVertexIndex]->getName());
 
         // check if we found the destination
         if (minVertexIndex == destination)

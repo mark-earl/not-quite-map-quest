@@ -172,12 +172,14 @@ void runMenu(const Digraph& directedGraph) {
             while(cities[i] < 1 || cities[i] > directedGraph.getNumberOfVertices()); // range: [1, numberOfVertices]
         }
 
-        // output distance between the two cities
+        // output distance and path between the two cities
         int sourceIndex = cities[0] - 1;
         int destinationIndex = cities[1] - 1;
         std::cout << "\nThe distance between " << directedGraph.getVertex(sourceIndex)->getName();
         std::cout << " and " << directedGraph.getVertex(destinationIndex)->getName();
-        std::cout << " is: " << directedGraph.dijkstra(sourceIndex, destinationIndex) << "\n\n";
+        bool usingMenu = true;
+        std::string path;
+        std::cout << " is: " << directedGraph.dijkstra(sourceIndex, destinationIndex, path, usingMenu) << '\n' << path << "\n\n";
 
         // prompt user if they want to go again
         std::cout << "Again?[Y/N]:";

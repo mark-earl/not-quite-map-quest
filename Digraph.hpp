@@ -113,8 +113,10 @@ public:
     // Compute shortest path distances from `source` to `destination`
     // @param `source` The index of the source city.
     // @param `destination` The index of the destination city.
+    // @param `path` A string that holds the path between the cities
+    // @param `usingMenu` Flag to control output of paths between cities
     // @returns The distance between source and destination
-    int dijkstra(int source, int destination) const;
+    int dijkstra(int source, int destination, std::string& path, bool usingMenu = false) const;
 
     // Destructor, Frees all allocated memory
     ~Digraph();
